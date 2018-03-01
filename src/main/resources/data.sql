@@ -2,7 +2,7 @@
 INSERT INTO country (id, name) VALUES ('1', 'Mexico');
 
 --STATE
-INSERT INTO state (id, name, country) VALUES ('1', 'Aguas', '1');
+INSERT INTO state (id, name, country_id) VALUES ('1', 'Aguas', '1');
 
 --CITY
 INSERT INTO city (id, name, state) VALUES ('1', 'Obregon1', '1');

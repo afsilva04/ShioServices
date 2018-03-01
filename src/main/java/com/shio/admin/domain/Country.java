@@ -1,5 +1,6 @@
 package com.shio.admin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 
@@ -20,7 +21,11 @@ public class Country {
     private long id;
     private String name;
 
-    //@JsonIgnore
+    @JsonIgnore
+    @OneToMany(mappedBy = "country")
+    private Set<Client> states;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "country")
     private Set<Client> clients;
 }
