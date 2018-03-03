@@ -26,5 +26,9 @@ public class State {
 
     @JsonIgnore
     @OneToMany(mappedBy = "state")
+    private Set<City> cities;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "state")
     private Set<Client> clients;
 }

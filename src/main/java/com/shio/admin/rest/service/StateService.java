@@ -18,7 +18,7 @@ public class StateService {
     }
 
     public List<State> getStatesByCountry(long countryId) {
-        return stateRepository.findAllByCountry(countryId);
+        return stateRepository.findAllByCountryId(countryId);
     }
 
 }

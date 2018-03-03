@@ -1,5 +1,6 @@
 package com.shio.admin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 
@@ -18,12 +19,23 @@ public class Subsidiary {
     @Id
     private long id;
     private String name;
-    /*private String email;
+    private String email;
     private String phone;
     private String mobile;
-    private String company;
-    private String country;*/
+    private String location;
+    private String colony;
+    private String address;
+    private String zip;
+    private String active;
 
+    //ManyToOne
+    private String company;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "subsidiary")
     private Set<Client> clients;
 }

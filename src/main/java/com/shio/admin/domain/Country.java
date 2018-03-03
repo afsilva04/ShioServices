@@ -28,4 +28,5 @@ public class Country {
     @JsonIgnore
     @OneToMany(mappedBy = "country")
     private Set<Client> clients;
+
 }

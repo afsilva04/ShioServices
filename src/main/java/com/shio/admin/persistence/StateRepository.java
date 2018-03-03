@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface StateRepository extends JpaRepository<State, Long> {
 
-    List<State> findAllByCountry(long id);
+    List<State> findAllByCountryId(long id);
 
 }
