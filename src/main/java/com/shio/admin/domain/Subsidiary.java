@@ -28,8 +28,9 @@ public class Subsidiary {
     private String zip;
     private String active;
 
-    //ManyToOne
-    private String company;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
@@ -38,4 +39,9 @@ public class Subsidiary {
     @JsonIgnore
     @OneToMany(mappedBy = "subsidiary")
     private Set<Client> clients;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "subsidiary")
+    private Set<Employee> employees;
+
 }

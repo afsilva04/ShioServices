@@ -1,0 +1,32 @@
+package com.shio.admin.rest.service;
+
+import com.shio.admin.domain.Product;
+import com.shio.admin.persistence.ProductRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Service
+public class ProductService {
+
+    private ProductRepository productRepository;
+
+    public List<Product> getAll(){
+        return productRepository.findAll();
+    }
+
+    public Product getSingle(Long id){
+        return productRepository.findOne(id);
+    }
+
+    public Product create(Product product){
+        return productRepository.save(product);
+    }
+
+    public Product update(Product product){
+        return productRepository.save(product);
+    }
+
+}

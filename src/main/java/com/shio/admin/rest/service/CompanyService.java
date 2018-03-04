@@ -17,4 +17,6 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
+    public Company getSingle(long id) { return  companyRepository.findOne(id); }
+
 }

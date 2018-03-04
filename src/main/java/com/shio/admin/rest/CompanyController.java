@@ -3,10 +3,7 @@ package com.shio.admin.rest;
 import com.shio.admin.domain.Company;
 import com.shio.admin.rest.service.CompanyService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +18,11 @@ public class CompanyController {
     @GetMapping
     public List<Company> getAll(){
         return companyService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Company getSingle(@PathVariable("id") long id){
+        return companyService.getSingle(id);
     }
 
 }
