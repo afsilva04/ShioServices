@@ -1,7 +1,7 @@
 package com.shio.admin.rest;
 
 import com.shio.admin.domain.State;
-import com.shio.admin.rest.service.StateService;
+import com.shio.admin.service.StateService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

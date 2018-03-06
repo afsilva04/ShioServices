@@ -1,11 +1,10 @@
-package com.shio.admin.rest.service;
+package com.shio.admin.service;
 
-import com.shio.admin.domain.City;
 import com.shio.admin.domain.Client;
 import com.shio.admin.persistence.CityRepository;
 import com.shio.admin.persistence.ClientRepository;
-import com.shio.admin.rest.DTO.ClientDTO;
-import com.shio.admin.rest.Mappers.ClientMapper;
+import com.shio.admin.DTO.ClientDTO;
+import com.shio.admin.mappers.ClientMapper;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;

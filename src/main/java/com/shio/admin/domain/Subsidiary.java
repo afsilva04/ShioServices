@@ -44,4 +44,8 @@ public class Subsidiary {
     @OneToMany(mappedBy = "subsidiary")
     private Set<Employee> employees;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "subsidiary")
+    private Set<Appointment> appointments;
+
 }

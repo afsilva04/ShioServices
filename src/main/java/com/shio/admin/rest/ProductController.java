@@ -1,8 +1,7 @@
 package com.shio.admin.rest;
 
 import com.shio.admin.domain.Product;
-import com.shio.admin.rest.DTO.ProductDTO;
-import com.shio.admin.rest.service.ProductService;
+import com.shio.admin.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

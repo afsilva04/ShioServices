@@ -1,4 +1,4 @@
-package com.shio.admin.rest.service;
+package com.shio.admin.service;
 
 import com.shio.admin.domain.Company;
 import com.shio.admin.persistence.CompanyRepository;

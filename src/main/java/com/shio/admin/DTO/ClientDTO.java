@@ -1,12 +1,10 @@
-package com.shio.admin.rest.DTO;
+package com.shio.admin.DTO;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-import com.shio.admin.domain.City;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;

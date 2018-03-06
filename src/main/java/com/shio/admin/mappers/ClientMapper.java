@@ -1,8 +1,7 @@
-package com.shio.admin.rest.Mappers;
+package com.shio.admin.mappers;
 
-import com.shio.admin.domain.City;
 import com.shio.admin.domain.Client;
-import com.shio.admin.rest.DTO.ClientDTO;
+import com.shio.admin.DTO.ClientDTO;
 import org.springframework.stereotype.Component;
 
 /**

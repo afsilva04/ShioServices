@@ -1,7 +1,7 @@
 package com.shio.admin.rest;
 
 import com.shio.admin.domain.Employee;
-import com.shio.admin.rest.service.EmployeeService;
+import com.shio.admin.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

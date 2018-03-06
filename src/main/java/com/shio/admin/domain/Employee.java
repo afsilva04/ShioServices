@@ -19,7 +19,7 @@ public class Employee {
     private String active;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subsidiary_id")
+    @JoinColumn(name = "subsidiaryId")
     private Subsidiary subsidiary;
 
 }

@@ -4,8 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "Client")
@@ -44,10 +47,14 @@ public class Client {
     private String rfc;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subsidiary_id")
+    @JoinColumn(name = "subsidiaryId")
     private Subsidiary subsidiary;
 
     private String active;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private Set<Appointment> appointments;
 
     public interface Existing { }
     public interface New { }

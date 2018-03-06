@@ -1,4 +1,4 @@
-package com.shio.admin.rest.DTO;
+package com.shio.admin.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

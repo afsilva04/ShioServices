@@ -1,7 +1,7 @@
 package com.shio.admin.rest;
 
 import com.shio.admin.domain.Subsidiary;
-import com.shio.admin.rest.service.SubsidiaryService;
+import com.shio.admin.service.SubsidiaryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

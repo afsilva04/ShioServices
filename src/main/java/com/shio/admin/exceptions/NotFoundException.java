@@ -1,4 +1,4 @@
-package com.shio.admin.rest.exceptions;
+package com.shio.admin.exceptions;
 
 public class NotFoundException extends Exception {
 

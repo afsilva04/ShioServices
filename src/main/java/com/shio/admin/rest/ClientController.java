@@ -1,9 +1,9 @@
 package com.shio.admin.rest;
 import com.shio.admin.domain.Client;
 import com.shio.admin.persistence.ClientRepository;
-import com.shio.admin.rest.DTO.ClientDTO;
+import com.shio.admin.DTO.ClientDTO;
 import java.util.List;
-import com.shio.admin.rest.service.ClientService;
+import com.shio.admin.service.ClientService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

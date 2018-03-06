@@ -58,3 +58,11 @@ VALUES ('Dabalash', 'Crecimiento de pestanas y cejas', '9001231231239', '10', '1
 --SERVICE
 INSERT INTO service (name, description, codbar, commission, active, price, time)
 VALUES ('Corte Mujer', '', '123123', '15', '1', '500', '20');
+
+--APPOINTMENT
+INSERT INTO appointment (date, note, rescheduled, client_id, subsidiary_id)
+VALUES ('2018-03-03', 'Notas', '1', '1', '2');
+
+--APPOINTMENT ITEM
+INSERT INTO appointment_item (time, status, service_id, appointment_id)
+VALUES ('10', 'Creada', '1', '1');

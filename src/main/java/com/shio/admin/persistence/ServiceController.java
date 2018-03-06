@@ -1,7 +1,7 @@
 package com.shio.admin.persistence;
 
 import com.shio.admin.domain.Sservice;
-import com.shio.admin.rest.service.ServiceService;
+import com.shio.admin.service.ServiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
