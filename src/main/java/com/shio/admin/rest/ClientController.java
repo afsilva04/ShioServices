@@ -17,10 +17,17 @@ public class ClientController {
     private final ClientRepository clientRepository;
     private final ClientService clientService;
 
+
+    @GetMapping
+    public List<ClientDTO> getAll(){
+        return clientService.getAll();
+    }
+
+    /*
     @GetMapping()
     public List<ClientDTO> getAll(@RequestParam(value = "search_txt", required = false) String searchTxt) {
         return clientService.getClients(searchTxt);
-    }
+    }*/
 
     @GetMapping("/{client_id}")
     public ClientDTO getSingle(@PathVariable("client_id") long clientId) {

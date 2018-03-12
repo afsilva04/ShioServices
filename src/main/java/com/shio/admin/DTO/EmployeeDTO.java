@@ -2,20 +2,22 @@ package com.shio.admin.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
 @Setter
-public class AppointmentItemDTO {
+public class EmployeeDTO {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String time;
-    private String status;
-    private Long serviceId;
-    private String serviceName;
-    private Long appointmentId;
+    private String name;
+    private String email;
+    private String phone;
+    private String position;
+    private String active;
+    private String subsidiaryId;
 
 }

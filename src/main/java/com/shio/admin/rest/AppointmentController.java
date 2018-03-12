@@ -1,6 +1,7 @@
 package com.shio.admin.rest;
 
-import com.shio.admin.DTO.AppointmentDTO;
+import com.shio.admin.DTO.AppointmentCreateDTO;
+import com.shio.admin.DTO.AppointmentViewDTO;
 import com.shio.admin.domain.Appointment;
 import com.shio.admin.service.AppointmentService;
 import lombok.AllArgsConstructor;
@@ -17,27 +18,27 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping
-    public List<Appointment> getAll(){
+    public List<AppointmentViewDTO> getAll(){
         return appointmentService.getAll();
     }
 
-    @GetMapping("/search/{date}")
+    /*@GetMapping("/search/{date}")
     public List<Appointment> getAllByDate(@PathVariable("date") String date){
         return appointmentService.getAllByDate(date);
-    }
+    }*/
 
     @GetMapping("/{id}")
-    public Appointment getSingle(@PathVariable("id") Long id){
+    public AppointmentViewDTO getSingle(@PathVariable("id") Long id){
         return appointmentService.getSingle(id);
     }
 
     @PostMapping
-    public Appointment create(@RequestBody AppointmentDTO appointment){
+    public Appointment create(@RequestBody AppointmentCreateDTO appointment){
         return appointmentService.create(appointment);
     }
 
     @PutMapping
-    public Appointment update(@RequestBody AppointmentDTO appointment){
+    public Appointment update(@RequestBody AppointmentCreateDTO appointment){
         return appointmentService.update(appointment);
     }
 

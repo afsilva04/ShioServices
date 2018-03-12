@@ -1,6 +1,8 @@
 package com.shio.admin.mappers;
 
 import com.shio.admin.DTO.AppointmentItemDTO;
+import com.shio.admin.DTO.AppointmentViewDTO;
+import com.shio.admin.domain.Appointment;
 import com.shio.admin.domain.AppointmentItem;
 import com.shio.admin.persistence.AppointmentRepository;
 import com.shio.admin.persistence.ServiceRepository;
@@ -25,6 +27,21 @@ public class AppointmentItemMapper {
         appointmentItem.setService(serviceRepository.findOne(appointmentItemDTO.getServiceId()));
 
         return appointmentItem;
+
+    }
+
+    public AppointmentItemDTO toDTO(AppointmentItem appointmentItem){
+
+        AppointmentItemDTO appointmentItemDTO = new AppointmentItemDTO();
+
+        appointmentItemDTO.setId(appointmentItem.getId());
+        appointmentItemDTO.setTime(appointmentItem.getTime());
+        appointmentItemDTO.setStatus(appointmentItem.getStatus());
+        appointmentItemDTO.setServiceId(appointmentItem.getService().getId());
+        appointmentItemDTO.setServiceName(appointmentItem.getService().getName());
+        appointmentItemDTO.setAppointmentId(appointmentItem.getAppointment().getId());
+
+        return appointmentItemDTO;
 
     }
 

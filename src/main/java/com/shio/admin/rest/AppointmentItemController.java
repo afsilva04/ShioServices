@@ -17,7 +17,7 @@ public class AppointmentItemController {
     private AppointmentItemService appointmentItemService;
 
     @GetMapping("/{appointment_id}")
-    public List<AppointmentItem> getAllByAppointment(@PathVariable("appointment_id") Long appointmentId){
+    public List<AppointmentItemDTO> getAllByAppointment(@PathVariable("appointment_id") Long appointmentId){
         return appointmentItemService.getAllByAppointment(appointmentId);
     }
 
@@ -35,6 +35,11 @@ public class AppointmentItemController {
     @PutMapping
     public AppointmentItem update(@RequestBody AppointmentItemDTO appointmentItem){
         return appointmentItemService.update(appointmentItem);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id){
+        appointmentItemService.delete(id);
     }
 
 }

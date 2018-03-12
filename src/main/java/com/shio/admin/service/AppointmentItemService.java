@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -16,8 +17,11 @@ public class AppointmentItemService {
     private AppointmentItemRepository appointmentItemRepository;
     private AppointmentItemMapper appointmentItemMapper;
 
-    public List<AppointmentItem> getAllByAppointment(Long appointmentId){
-        return appointmentItemRepository.findAllByAppointmentId(appointmentId);
+    public List<AppointmentItemDTO> getAllByAppointment(Long appointmentId){
+        return appointmentItemRepository.findAllByAppointmentId(appointmentId)
+                .stream()
+                .map(a -> appointmentItemMapper.toDTO(a))
+                .collect(Collectors.toList());
     }
 
     public List<AppointmentItem> getAllByAppointmentAndId(Long appointmentId, Long id){
@@ -30,6 +34,10 @@ public class AppointmentItemService {
 
     public AppointmentItem update(AppointmentItemDTO appointmentItem){
         return appointmentItemRepository.save(appointmentItemMapper.toEntity(appointmentItem));
+    }
+
+    public void delete(Long id){
+        appointmentItemRepository.delete(id);
     }
 
 }

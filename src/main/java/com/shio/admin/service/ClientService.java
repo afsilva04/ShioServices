@@ -25,6 +25,11 @@ public class ClientService {
         this.clientMapper = clientMapper;
     }
 
+    public List<ClientDTO> getAll(){
+        return clientRepository.findAll().stream().
+                map(n -> clientMapper.getClientDTO(n)).collect(Collectors.toList());
+    }
+
     public ClientDTO getClient(long clientId){
         Client client = clientRepository.findOne(clientId);
         //City city = cityRepository.findOne(client.getCity().getId());

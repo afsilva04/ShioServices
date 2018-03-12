@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Getter
 @Setter
-public class AppointmentDTO {
+public class AppointmentCreateDTO {
 
     @Id
     @GeneratedValue

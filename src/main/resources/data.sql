@@ -65,4 +65,4 @@ VALUES ('2018-03-03', 'Notas', '1', '1', '2');
 
 --APPOINTMENT ITEM
 INSERT INTO appointment_item (time, status, service_id, appointment_id)
-VALUES ('10', 'Creada', '1', '1');
+VALUES ('10', '1', '1', '1');
