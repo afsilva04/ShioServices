@@ -66,3 +66,17 @@ VALUES ('2018-03-03', 'Notas', '1', '1', '2');
 --APPOINTMENT ITEM
 INSERT INTO appointment_item (time, status, service_id, appointment_id)
 VALUES ('10', '1', '1', '1');
+
+--TRANSACTION
+INSERT INTO transaction (date, invoice, canceled, processed, reason, client_id, subsidiary_id)
+VALUES ('20180303', '123123', 'true', 'true', '1', '1', '1');
+
+INSERT INTO transaction (date, invoice, canceled, processed, reason, client_id, subsidiary_id)
+VALUES ('20180308', '', 'true', 'true', '1', '1', '1');
+
+--TRANSACTION ITEM
+INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, transaction_id)
+VALUES ('1', '2', 300, 20, '1', null, '1');
+
+INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, transaction_id)
+VALUES ('1', '2', 50, 5, null, '1', '2');

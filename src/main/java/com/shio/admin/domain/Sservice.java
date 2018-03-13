@@ -25,4 +25,8 @@ public class Sservice {
     @OneToMany(mappedBy = "service")
     private Set<AppointmentItem> appointmentItems;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "service")
+    private Set<TransactionItem> transactionItems;
+
 }

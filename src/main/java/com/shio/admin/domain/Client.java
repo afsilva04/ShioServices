@@ -56,6 +56,10 @@ public class Client {
     @OneToMany(mappedBy = "client")
     private Set<Appointment> appointments;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private Set<Transaction> transactions;
+
     public interface Existing { }
     public interface New { }
 

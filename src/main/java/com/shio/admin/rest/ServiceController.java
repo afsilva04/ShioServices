@@ -1,4 +1,4 @@
-package com.shio.admin.persistence;
+package com.shio.admin.rest;
 
 import com.shio.admin.domain.Sservice;
 import com.shio.admin.service.ServiceService;
