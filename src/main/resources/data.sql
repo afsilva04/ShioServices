@@ -44,12 +44,12 @@ VALUES ('Wisi', 'wisi@dabalash.org', '123123123', 'Administrador', '1', '1');
 INSERT INTO client (name, email, phone, mobile, birthdate, country_id, state_id, city_id, location, colony,
 address, zip, rfc, subsidiary_id, active)
 VALUES ('Juan Camilo', 'jcamilo@gmail.com', '3335500', '3013336655', '1987-07-04', '1', '1', '1', '1', '1',
-'1056 Water AV', '123987', 'SHIOBB99DDF', '1', '0');
+'1056 Water AV', '123987', 'SBI130426ID8', '1', '0');
 
 INSERT INTO client (name, email, phone, mobile, birthdate, country_id, state_id, city_id, location, colony,
 address, zip, rfc, subsidiary_id, active)
 VALUES ('Andres Felipe', 'andres@gmail.com', '2224400', '3184094630', '1987-05-17', '1', '1', '2', '2', '1',
-'3311 Water AV', '123987', 'AFSBB99DDF', '3', '1');
+'3311 Water AV', '123987', 'SBI130426ID8', '3', '1');
 
 --PRODUCT
 INSERT INTO product (name, description, codbar, commission, active, price)
@@ -76,7 +76,7 @@ VALUES ('20180308', '', 'true', 'true', '1', '1', '1');
 
 --TRANSACTION ITEM
 INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, transaction_id)
-VALUES ('1', '2', 300, 20, '1', null, '1');
+VALUES ('1', '2', 300, 0, '1', null, '1');
 
 INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, transaction_id)
-VALUES ('1', '2', 50, 5, null, '1', '2');
+VALUES ('1', '2', 50, 0, null, '1', '2');
