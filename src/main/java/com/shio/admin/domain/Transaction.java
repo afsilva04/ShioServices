@@ -16,6 +16,7 @@ public class Transaction {
     private Long id;
     private String date;
     private String invoice;
+    private String invoicepdf;
     private Boolean canceled;
     private Boolean processed;
     private String reason;

@@ -17,6 +17,13 @@ public class AppointmentItemService {
     private AppointmentItemRepository appointmentItemRepository;
     private AppointmentItemMapper appointmentItemMapper;
 
+    public List<AppointmentItemDTO> getAll(){
+        return appointmentItemRepository.findAll()
+                .stream()
+                .map(a -> appointmentItemMapper.toDTO(a))
+                .collect(Collectors.toList());
+    }
+
     public List<AppointmentItemDTO> getAllByAppointment(Long appointmentId){
         return appointmentItemRepository.findAllByAppointmentId(appointmentId)
                 .stream()

@@ -15,6 +15,7 @@ public class TransactionDTO {
     private Long id;
     private String date;
     private String invoice;
+    private String invoicePdf;
     private Boolean canceled;
     private Boolean processed;
     private String reasonId;

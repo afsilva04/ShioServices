@@ -21,6 +21,7 @@ public class TransactionMapper {
         transactionDTO.setId(transaction.getId());
         transactionDTO.setDate(transaction.getDate());
         transactionDTO.setInvoice(transaction.getInvoice());
+        transactionDTO.setInvoicePdf(transaction.getInvoicepdf());
         transactionDTO.setCanceled(transaction.getCanceled());
         transactionDTO.setProcessed(transaction.getProcessed());
         transactionDTO.setReasonId(transaction.getReason());
@@ -40,6 +41,7 @@ public class TransactionMapper {
         transaction.setId(transactionDTO.getId());
         transaction.setDate(transactionDTO.getDate());
         transaction.setInvoice(transactionDTO.getInvoice());
+        transaction.setInvoicepdf(transactionDTO.getInvoicePdf());
         transaction.setCanceled(transactionDTO.getCanceled());
         transaction.setProcessed(transactionDTO.getProcessed());
         transaction.setReason(transactionDTO.getReasonId());

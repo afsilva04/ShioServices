@@ -2,6 +2,8 @@ package com.shio.admin.rest;
 
 import com.shio.admin.DTO.InvoiceDTO;
 import com.shio.admin.DTO.InvoiceData;
+import com.shio.admin.DTO.InvoiceSatUpdate;
+import com.shio.admin.domain.Transaction;
 import com.shio.admin.service.InvoiceService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,11 @@ public class InvoiceController {
     @PostMapping
     public String satInvoice(@RequestBody InvoiceData invoiceData){
         return invoiceService.createInvoice(invoiceData);
+    }
+
+    @PutMapping
+    public Transaction updateInvoiceToTransaction(@RequestBody InvoiceSatUpdate invoiceSatUpdate){
+        return invoiceService.updateInvoiceToTransaction(invoiceSatUpdate);
     }
 
 }

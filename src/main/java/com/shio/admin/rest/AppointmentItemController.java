@@ -16,6 +16,11 @@ public class AppointmentItemController {
 
     private AppointmentItemService appointmentItemService;
 
+    @GetMapping
+    public List<AppointmentItemDTO> getAll(){
+        return appointmentItemService.getAll();
+    }
+
     @GetMapping("/{appointment_id}")
     public List<AppointmentItemDTO> getAllByAppointment(@PathVariable("appointment_id") Long appointmentId){
         return appointmentItemService.getAllByAppointment(appointmentId);

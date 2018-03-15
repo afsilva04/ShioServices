@@ -190,4 +190,15 @@ public class InvoiceService {
         return cfdiRequest;
     }
 
+    public Transaction updateInvoiceToTransaction(InvoiceSatUpdate invoiceSatUpdate){
+        TransactionDTO transactionDTO = transactionMapper.toDTO
+                (transactionRepository.findOne(invoiceSatUpdate.getTransaction()));
+        if(invoiceSatUpdate.getInvoice().equals("0"))
+            transactionDTO.setInvoice("");
+        else
+            transactionDTO.setInvoice(invoiceSatUpdate.getInvoice());
+        transactionDTO.setInvoicePdf(invoiceSatUpdate.getPdf());
+        return transactionRepository.save(transactionMapper.toEntity(transactionDTO));
+    }
+
 }
