@@ -1,13 +1,9 @@
 package com.shio.admin.service;
 
 import com.shio.admin.DTO.InventoryDTO;
-import com.shio.admin.domain.Inventory;
-import com.shio.admin.domain.Transaction;
-import com.shio.admin.domain.TransactionItem;
+import com.shio.admin.domain.*;
 import com.shio.admin.mappers.InventoryMapper;
-import com.shio.admin.persistence.InventoryRepository;
-import com.shio.admin.persistence.TransactionItemRepository;
-import com.shio.admin.persistence.TransactionRepository;
+import com.shio.admin.persistence.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +18,8 @@ public class InventoryService {
     private InventoryMapper inventoryMapper;
     private TransactionRepository transactionRepository;
     private TransactionItemRepository transactionItemRepository;
+    private EntryRepository entryRepository;
+    private EntryItemRepository entryItemRepository;
 
     public List<InventoryDTO> getAll(){
         return inventoryRepository.findAll()
@@ -76,5 +74,27 @@ public class InventoryService {
                 add(item.getProduct().getId(), transaction.getSubsidiary().getId(), item.getQuantity());
         }
     }
+
+    public void addInventoryByEntry(Long id){
+        Entry entry = entryRepository.findOne(id);
+        List<EntryItem> entryItems = entryItemRepository.findAllByEntryId(id);
+
+        for (EntryItem item: entryItems){
+            if(item.getProduct() != null)
+                add(item.getProduct().getId(), entry.getSubsidiary().getId(), item.getQuantity());
+        }
+    }
+
+    public void substractInventoryByEntry(Long id){
+        Entry entry = entryRepository.findOne(id);
+        List<EntryItem> entryItems = entryItemRepository.findAllByEntryId(id);
+
+        for (EntryItem item: entryItems){
+            if(item.getProduct() != null)
+                substract(item.getProduct().getId(), entry.getSubsidiary().getId(), item.getQuantity());
+        }
+    }
+
+
 
 }

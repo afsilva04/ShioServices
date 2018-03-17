@@ -15,6 +15,8 @@ public class EntryDTO {
     @GeneratedValue
     private Long id;
     private String date;
+    private int confirmed;
+    private String confirmedName;
     private Long subsidiaryId;
     private String subsidiaryName;
 

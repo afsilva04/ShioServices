@@ -55,6 +55,11 @@ public class InventoryController {
         inventoryService.addInventoryByTransaction(id);
     }
 
+    @PostMapping("/add-by-entry/{id_entry}")
+    public void addInventoryByEntry(@PathVariable("id_entry") Long id){
+        inventoryService.addInventoryByEntry(id);
+    }
+
     @PostMapping
     public Inventory save(@RequestBody InventoryDTO inventoryDTO){
         return inventoryService.save(inventoryDTO);

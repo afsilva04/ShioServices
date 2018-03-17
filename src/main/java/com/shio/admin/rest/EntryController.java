@@ -21,7 +21,7 @@ public class EntryController {
         return entryService.getAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public EntryDTO getSingle(@PathVariable("id") Long id){
         return entryService.getSingle(id);
     }
@@ -31,4 +31,13 @@ public class EntryController {
         return entryService.create(entryDTO);
     }
 
+    @PutMapping
+    public Entry update(@RequestBody EntryDTO entryDTO){
+        return entryService.update(entryDTO);
+    }
+
+    @PostMapping("/confirm/{id}")
+    public EntryDTO confirmEntry(@PathVariable Long id){
+        return entryService.confirmEntry(id);
+    }
 }

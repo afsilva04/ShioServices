@@ -15,6 +15,7 @@ public class Entry {
     @GeneratedValue
     private Long id;
     private String date;
+    private int confirmed;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subsidiaryId")

@@ -32,4 +32,15 @@ public class EntryService {
         return entryRepository.save(entryMapper.toEntity(entryDTO));
     }
 
+    public Entry update(EntryDTO entryDTO){
+        return entryRepository.save(entryMapper.toEntity(entryDTO));
+    }
+
+    public EntryDTO confirmEntry(Long id){
+        Entry entry = entryRepository.findOne(id);
+        entry.setConfirmed(1);
+        entryRepository.save(entry);
+        return entryMapper.toDTO(entry);
+    }
+
 }

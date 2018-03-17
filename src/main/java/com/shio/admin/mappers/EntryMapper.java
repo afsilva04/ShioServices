@@ -19,6 +19,19 @@ public class EntryMapper {
 
         entryDTO.setId(entry.getId());
         entryDTO.setDate(entry.getDate());
+        entryDTO.setConfirmed(entry.getConfirmed());
+
+        switch (entryDTO.getConfirmed()){
+            case 0:
+                entryDTO.setConfirmedName("Pendiente");
+                break;
+            case 1:
+                entryDTO.setConfirmedName("Confirmada");
+                break;
+            default:
+                break;
+        }
+
         if(entry.getSubsidiary() != null) {
             entryDTO.setSubsidiaryId(entry.getSubsidiary().getId());
             entryDTO.setSubsidiaryName(entry.getSubsidiary().getName());
@@ -34,6 +47,7 @@ public class EntryMapper {
 
         entry.setId(entryDTO.getId());
         entry.setDate(entryDTO.getDate());
+        entry.setConfirmed(entryDTO.getConfirmed());
 
         if (entryDTO.getSubsidiaryId() != null && entryDTO.getSubsidiaryId() != 0)
             entry.setSubsidiary(subsidiaryRepository.findOne(entryDTO.getSubsidiaryId()));

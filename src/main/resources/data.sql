@@ -92,8 +92,8 @@ INSERT INTO inventory (quantity, product_id, subsidiary_id)
 VALUES ('5', '1', '2');
 
 --ENTRY
-INSERT INTO entry (date, subsidiary_id)
-VALUES ('2018-03-10', '1');
+INSERT INTO entry (date, confirmed, subsidiary_id)
+VALUES ('2018-03-10', '0', '1');
 
 --ENTRY ITEM
 INSERT INTO entryitem (quantity, product_id, entry_id)
