@@ -20,6 +20,8 @@ public class Sservice {
     private String active;
     private String price;
     private String time;
+    private String key;
+    private String unit;
 
     @JsonIgnore
     @OneToMany(mappedBy = "service")

@@ -17,6 +17,7 @@ import java.util.Set;
 public class Subsidiary {
 
     @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String email;
@@ -51,5 +52,13 @@ public class Subsidiary {
     @JsonIgnore
     @OneToMany(mappedBy = "subsidiary")
     private Set<Transaction> transactions;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "subsidiary")
+    private Set<Inventory> inventories;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "subsidiary")
+    private Set<Entry> entries;
 
 }

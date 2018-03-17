@@ -28,6 +28,10 @@ public class TransactionItem {
     private Sservice service;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 

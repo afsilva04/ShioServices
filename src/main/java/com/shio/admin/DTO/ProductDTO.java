@@ -19,5 +19,7 @@ public class ProductDTO {
     private String commission;
     private String active;
     private String price;
+    private String key;
+    private String unit;
 
 }

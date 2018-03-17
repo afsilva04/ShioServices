@@ -1,5 +1,6 @@
 package com.shio.admin.rest;
 
+import com.shio.admin.DTO.CompanyDTO;
 import com.shio.admin.domain.Company;
 import com.shio.admin.service.CompanyService;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,12 @@ public class CompanyController {
     private CompanyService companyService;
 
     @GetMapping
-    public List<Company> getAll(){
+    public List<CompanyDTO> getAll(){
         return companyService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Company getSingle(@PathVariable("id") long id){
+    public CompanyDTO getSingle(@PathVariable("id") long id){
         return companyService.getSingle(id);
     }
 

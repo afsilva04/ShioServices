@@ -21,6 +21,10 @@ public class AppointmentItem {
     private Sservice service;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 

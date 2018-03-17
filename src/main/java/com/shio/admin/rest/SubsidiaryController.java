@@ -1,5 +1,6 @@
 package com.shio.admin.rest;
 
+import com.shio.admin.DTO.SubsidiaryDTO;
 import com.shio.admin.domain.Subsidiary;
 import com.shio.admin.service.SubsidiaryService;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,12 @@ public class SubsidiaryController {
     private SubsidiaryService subsidiaryService;
 
     @GetMapping
-    public List<Subsidiary> getAll(){
+    public List<SubsidiaryDTO> getAll(){
         return subsidiaryService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Subsidiary getOne(@PathVariable("id") long id){
+    public SubsidiaryDTO getOne(@PathVariable("id") long id){
         return subsidiaryService.getOne(id);
     }
 

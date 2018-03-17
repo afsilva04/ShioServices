@@ -2,12 +2,16 @@ package com.shio.admin.service;
 
 import com.shio.admin.DTO.AppointmentCreateDTO;
 import com.shio.admin.DTO.AppointmentViewDTO;
+import com.shio.admin.DTO.TransactionDTO;
 import com.shio.admin.domain.Appointment;
+import com.shio.admin.domain.Transaction;
 import com.shio.admin.mappers.AppointmentMapper;
 import com.shio.admin.persistence.AppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +21,7 @@ public class AppointmentService {
 
     private AppointmentRepository appointmentRepository;
     private AppointmentMapper appointmentMapper;
+    private TransactionService transactionService;
 
     public List<AppointmentViewDTO> getAll(){
         return appointmentRepository.findAll().stream()
@@ -39,6 +44,20 @@ public class AppointmentService {
 
     public Appointment update(AppointmentCreateDTO appointment){
         return appointmentRepository.save(appointmentMapper.toEntity(appointment));
+    }
+
+    public Transaction createTransaction(Long id){
+        Appointment appointment = appointmentRepository.findOne(id);
+
+        TransactionDTO transactionDTO = new TransactionDTO();
+        transactionDTO.setDate(LocalDate.now().toString());
+        transactionDTO.setReasonId("1"); //Venta
+        transactionDTO.setClientId(appointment.getClient().getId());
+        transactionDTO.setSubsidiaryId(appointment.getSubsidiary().getId());
+
+        Transaction transaction = transactionService.create(transactionDTO);
+
+        return transaction;
     }
 
 }

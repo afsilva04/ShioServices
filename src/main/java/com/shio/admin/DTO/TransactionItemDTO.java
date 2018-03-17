@@ -22,6 +22,8 @@ public class TransactionItemDTO {
     private String productName;
     private Long serviceId;
     private String serviceName;
+    private Long employeeId;
+    private String employeeName;
     private Long transactionId;
 
 }

@@ -16,6 +16,8 @@ public class AppointmentItemDTO {
     private String status;
     private Long serviceId;
     private String serviceName;
+    private Long employeeId;
+    private String employeeName;
     private Long appointmentId;
 
 }

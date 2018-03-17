@@ -12,6 +12,7 @@ import java.util.Set;
 public class Company {
 
     @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String rfc;
