@@ -27,6 +27,9 @@ public class TransactionItemMapper {
         transactionItemDTO.setQuantity(transactionItem.getQuantity());
         transactionItemDTO.setPrice(transactionItem.getPrice());
         transactionItemDTO.setAditional(transactionItem.getAditional());
+        transactionItemDTO.setAnticipated(transactionItem.getAnticipated());
+        transactionItemDTO.setCoupon(transactionItem.getCoupon());
+        transactionItemDTO.setDateused(transactionItem.getDateused());
 
         if (transactionItem.getProduct() != null) {
             transactionItemDTO.setProductId(transactionItem.getProduct().getId());
@@ -58,6 +61,9 @@ public class TransactionItemMapper {
         transactionItem.setQuantity(transactionItemDTO.getQuantity());
         transactionItem.setPrice(transactionItemDTO.getPrice());
         transactionItem.setAditional(transactionItemDTO.getAditional());
+        transactionItem.setAnticipated(transactionItemDTO.getAnticipated());
+        transactionItem.setCoupon(transactionItemDTO.getCoupon());
+        transactionItem.setDateused(transactionItemDTO.getDateused());
 
         if (transactionItemDTO.getProductId() != null && transactionItemDTO.getProductId() != 0)
             transactionItem.setProduct(productRepository.findOne(transactionItemDTO.getProductId()));

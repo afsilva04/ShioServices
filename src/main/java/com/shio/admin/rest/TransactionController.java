@@ -36,4 +36,9 @@ public class TransactionController {
         return transactionService.update(transactionDTO);
     }
 
+    @PostMapping("/coupon/{transaction_id}")
+    public Transaction generateCoupons(@PathVariable("transaction_id") Long id){
+        return transactionService.generateCoupons(id);
+    }
+
 }

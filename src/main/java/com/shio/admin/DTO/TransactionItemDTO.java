@@ -18,6 +18,9 @@ public class TransactionItemDTO {
     private int quantity;
     private BigDecimal price;
     private BigDecimal aditional;
+    private Boolean anticipated;
+    private String coupon;
+    private String dateused;
     private Long productId;
     private String productName;
     private Long serviceId;

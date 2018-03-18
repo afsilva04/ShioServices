@@ -1,9 +1,11 @@
 package com.shio.admin.service;
 
 import com.shio.admin.DTO.TransactionItemDTO;
+import com.shio.admin.domain.Transaction;
 import com.shio.admin.domain.TransactionItem;
 import com.shio.admin.mappers.TransactionItemMapper;
 import com.shio.admin.persistence.TransactionItemRepository;
+import com.shio.admin.persistence.TransactionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ public class TransactionItemService {
 
     private TransactionItemRepository transactionItemRepository;
     private TransactionItemMapper transactionItemMapper;
+    private TransactionRepository transactionRepository;
 
     public List<TransactionItemDTO> getAll(){
         return transactionItemRepository.findAll()

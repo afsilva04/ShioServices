@@ -3,7 +3,6 @@ package com.shio.admin.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 import java.math.BigDecimal;
 
 @Entity
@@ -18,6 +17,9 @@ public class TransactionItem {
     private int quantity;
     private BigDecimal price;
     private BigDecimal aditional;
+    private Boolean anticipated;
+    private String coupon;
+    private String dateused;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
