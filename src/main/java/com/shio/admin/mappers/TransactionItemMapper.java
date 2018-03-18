@@ -1,5 +1,6 @@
 package com.shio.admin.mappers;
 
+import com.shio.admin.DTO.CouponDTO;
 import com.shio.admin.DTO.TransactionItemDTO;
 import com.shio.admin.domain.TransactionItem;
 import com.shio.admin.persistence.EmployeeRepository;
@@ -83,6 +84,14 @@ public class TransactionItemMapper {
         transactionItem.setTransaction(transactionRepository.findOne(transactionItemDTO.getTransactionId()));
 
         return transactionItem;
+
+    }
+
+    public CouponDTO toCouponDTO(TransactionItem transactionItem){
+
+        CouponDTO couponDTO = new CouponDTO();
+        couponDTO.setCode(transactionItem.getCoupon());
+        return couponDTO;
 
     }
 

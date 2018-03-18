@@ -74,15 +74,22 @@ VALUES ('2018-03-03', '123123', '', 'true', 'true', '1', '1', '1');
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
 VALUES ('2018-03-08', '', '', 'true', 'true', '1', '1', '1');
 
+INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
+VALUES ('2018-03-12', '', '', 'false', 'false', '2', '2', '3');
+
 --TRANSACTION ITEM
-INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, employee_id, transaction_id)
-VALUES ('1', '2', 300, 0, '1', null, '1', '1');
+INSERT INTO transactionitem (type, quantity, price, aditional, anticipated, coupon, dateused, product_id, service_id, employee_id, transaction_id)
+VALUES ('1', '2', 300, 0, 'true', 'OL1N1521392259269', null, '1', null, '1', '1');
 
-INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, employee_id, transaction_id)
-VALUES ('1', '2', 50, 0, null, '1', '1', '2');
+INSERT INTO transactionitem (type, quantity, price, aditional, anticipated, coupon, dateused, product_id, service_id, employee_id, transaction_id)
+VALUES ('1', '2', 50, 0, 'true', null, null, null, '1', '1', '2');
 
-INSERT INTO transactionitem (type, quantity, price, aditional, product_id, service_id, employee_id, transaction_id)
-VALUES ('1', '2', 50, 0, '1', null, '1', '2');
+INSERT INTO transactionitem (type, quantity, price, aditional, anticipated, coupon, dateused, product_id, service_id, employee_id, transaction_id)
+VALUES ('1', '2', 50, 0, 'false', null, null, '1', null, '1', '2');
+
+--TRANSACTION COUPON
+INSERT INTO transactioncoupon (code, transaction_id)
+VALUES ('A00000001112222', '3');
 
 --INVENTORY
 INSERT INTO inventory (quantity, product_id, subsidiary_id)

@@ -52,13 +52,16 @@ public class TransactionService {
                 .map(i -> transactionItemMapper.toDTO(i))
                 .collect(Collectors.toList());
 
-        int index = 0;
+        //int index = 0;
         for (TransactionItemDTO item : transactionItemDTOS) {
             if(item.getAnticipated() != null && item.getAnticipated()) {
-                index++;
+                //index++;
                 Long datetime = System.currentTimeMillis();
                 item.setCoupon(transaction.getSubsidiary().getName().substring(0, 2).toUpperCase()
-                        + index
+                        //+ index
+                        + transaction.getId()
+                        + "T"
+                        + item.getId()
                         + "N"
                         + datetime.toString());
                 transactionItemRepository.save(transactionItemMapper.toEntity(item));

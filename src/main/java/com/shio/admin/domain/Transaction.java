@@ -3,7 +3,6 @@ package com.shio.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -32,5 +31,9 @@ public class Transaction {
     @JsonIgnore
     @OneToMany(mappedBy = "transaction")
     private Set<TransactionItem> transactionItems;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "transaction")
+    private Set<TransactionCoupon> transactionCoupons;
 
 }

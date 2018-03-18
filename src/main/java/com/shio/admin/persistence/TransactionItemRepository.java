@@ -9,5 +9,7 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
 
     List<TransactionItem> findAllByTransactionId(Long transactionId);
     List<TransactionItem> findAllByTransactionIdAndId(Long transactionId, Long id);
+    List<TransactionItem> findAllByAnticipatedTrueAndCouponNotNullAndDateusedIsNull();
+    List<TransactionItem> findAllByAnticipatedTrue();
 
 }
