@@ -3,6 +3,7 @@ package com.shio.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class Sservice {
     private String codbar;
     private String commission;
     private String active;
-    private String price;
+    private BigDecimal price;
     private String time;
     private String key;
     private String unit;

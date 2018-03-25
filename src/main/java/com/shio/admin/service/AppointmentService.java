@@ -3,9 +3,12 @@ package com.shio.admin.service;
 import com.shio.admin.DTO.AppointmentCreateDTO;
 import com.shio.admin.DTO.AppointmentViewDTO;
 import com.shio.admin.DTO.TransactionDTO;
+import com.shio.admin.DTO.TransactionItemDTO;
 import com.shio.admin.domain.Appointment;
+import com.shio.admin.domain.AppointmentItem;
 import com.shio.admin.domain.Transaction;
 import com.shio.admin.mappers.AppointmentMapper;
+import com.shio.admin.persistence.AppointmentItemRepository;
 import com.shio.admin.persistence.AppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,8 @@ public class AppointmentService {
     private AppointmentRepository appointmentRepository;
     private AppointmentMapper appointmentMapper;
     private TransactionService transactionService;
+    private AppointmentItemRepository appointmentItemRepository;
+    private TransactionItemService transactionItemService;
 
     public List<AppointmentViewDTO> getAll(){
         return appointmentRepository.findAll().stream()
@@ -37,13 +42,13 @@ public class AppointmentService {
         return appointmentMapper.EntityToViewDTO(appointmentRepository.findOne(id));
     }
 
-    public Appointment create(AppointmentCreateDTO appointment){
+    public Appointment create(AppointmentViewDTO appointment){
         //return appointmentRepository.save(appointment);
-        return appointmentRepository.save(appointmentMapper.toEntity(appointment));
+        return appointmentRepository.save(appointmentMapper.ViewDTOtoEntity(appointment));
     }
 
-    public Appointment update(AppointmentCreateDTO appointment){
-        return appointmentRepository.save(appointmentMapper.toEntity(appointment));
+    public Appointment update(AppointmentViewDTO appointment){
+        return appointmentRepository.save(appointmentMapper.ViewDTOtoEntity(appointment));
     }
 
     public Transaction createTransaction(Long id){
@@ -57,7 +62,28 @@ public class AppointmentService {
 
         Transaction transaction = transactionService.create(transactionDTO);
 
+        if(transaction != null)
+            createTransactionItems(id, transaction.getId());
+
         return transaction;
+    }
+
+    private void createTransactionItems(Long appointment, Long transaction){
+        List<AppointmentItem> appointmentItems = appointmentItemRepository.findAllByAppointmentId(appointment);
+
+        for (AppointmentItem item : appointmentItems) {
+            TransactionItemDTO transactionItemDTO = new TransactionItemDTO();
+            transactionItemDTO.setQuantity(1);
+            transactionItemDTO.setPrice(item.getService().getPrice());
+            transactionItemDTO.setAnticipated(false);
+            transactionItemDTO.setServiceId(item.getService().getId());
+            if(item.getEmployee() != null){
+                transactionItemDTO.setEmployeeId(item.getEmployee().getId());
+            }
+            transactionItemDTO.setTransactionId(transaction);
+
+            transactionItemService.create(transactionItemDTO);
+        }
     }
 
 }

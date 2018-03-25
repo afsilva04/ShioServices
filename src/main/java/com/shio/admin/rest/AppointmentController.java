@@ -34,12 +34,12 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public Appointment create(@RequestBody AppointmentCreateDTO appointment){
+    public Appointment create(@RequestBody AppointmentViewDTO appointment){
         return appointmentService.create(appointment);
     }
 
     @PutMapping
-    public Appointment update(@RequestBody AppointmentCreateDTO appointment){
+    public Appointment update(@RequestBody AppointmentViewDTO appointment){
         return appointmentService.update(appointment);
     }
 

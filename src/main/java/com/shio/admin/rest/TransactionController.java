@@ -41,4 +41,9 @@ public class TransactionController {
         return transactionService.generateCoupons(id);
     }
 
+    @PostMapping("/confirm/{transaction_id}")
+    public Transaction confirm(@PathVariable("transaction_id") Long id){
+        return transactionService.confirm(id);
+    }
+
 }

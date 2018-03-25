@@ -30,6 +30,21 @@ public class AppointmentMapper {
 
     }
 
+    public Appointment ViewDTOtoEntity(AppointmentViewDTO appointmentDTO){
+
+        Appointment appointment = new Appointment();
+
+        appointment.setId(appointmentDTO.getId());
+        appointment.setDate(appointmentDTO.getDate());
+        appointment.setNote(appointmentDTO.getNote());
+        appointment.setRescheduled(appointmentDTO.getRescheduled());
+        appointment.setClient(clientRepository.findOne(appointmentDTO.getClientId()));
+        appointment.setSubsidiary(subsidiaryRepository.findOne(appointmentDTO.getSubsidiaryId()));
+
+        return appointment;
+
+    }
+
     public AppointmentViewDTO EntityToViewDTO(Appointment appointment){
 
         AppointmentViewDTO appointmentViewDTO = new AppointmentViewDTO();

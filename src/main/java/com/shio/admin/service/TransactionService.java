@@ -71,4 +71,10 @@ public class TransactionService {
         return transaction;
     }
 
+    public Transaction confirm(Long id){
+        Transaction transaction = transactionRepository.findOne(id);
+        transaction.setInvoice("1");
+        return transactionRepository.save(transaction);
+    }
+
 }

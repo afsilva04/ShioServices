@@ -105,3 +105,7 @@ VALUES ('2018-03-10', '0', '1');
 --ENTRY ITEM
 INSERT INTO entryitem (quantity, product_id, entry_id)
 VALUES ('3', '1', '1');
+
+--COUPON
+INSERT INTO coupon (code, quantity, available, transactionorigin, transactionused, product_id, service_id, client_id)
+VALUES ('AAAAAA111222333', '2', '2', '2', null, '1', null, '1');
