@@ -16,7 +16,7 @@ public class Product {
     private String name;
     private String description;
     private String codbar;
-    private String commission;
+    private int commission;
     private String active;
     private String price;
     private String key;

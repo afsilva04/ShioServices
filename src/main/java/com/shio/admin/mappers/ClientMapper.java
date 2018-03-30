@@ -52,6 +52,7 @@ public class ClientMapper {
         clientDTO.setSubsidiaryId(client.getSubsidiary().getId());
         clientDTO.setSubsidiaryTxt(client.getSubsidiary().getName());
         clientDTO.setActive(client.getActive());
+        clientDTO.setSearchText(client.getMobile() + " - " + client.getName());
 
         return clientDTO;
     }

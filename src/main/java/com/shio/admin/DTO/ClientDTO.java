@@ -42,6 +42,7 @@ public class ClientDTO {
     private long subsidiaryId;
     private String subsidiaryTxt;
     private String active;
+    private String searchText;
 
     public interface Existing { }
     public interface New { }

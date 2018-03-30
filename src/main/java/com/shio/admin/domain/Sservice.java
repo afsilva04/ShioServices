@@ -17,7 +17,7 @@ public class Sservice {
     private String name;
     private String description;
     private String codbar;
-    private String commission;
+    private int commission;
     private String active;
     private BigDecimal price;
     private String time;
