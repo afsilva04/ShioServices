@@ -60,4 +60,8 @@ public class ReportService {
         return salesReportDTOS;
     }
 
+    public void appointmentsReport(){
+        //Inner Join Appointment - AppointmentItems
+    }
+
 }
