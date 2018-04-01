@@ -24,6 +24,6 @@ public class CompanyService {
                 .collect(Collectors.toList());
     }
 
-    public CompanyDTO getSingle(long id) { return  companyMapper.toDTO(companyRepository.findOne(id)); }
+    public CompanyDTO getSingle(long id) { return  companyMapper.toDTO(companyRepository.findById(id).get()); }
 
 }

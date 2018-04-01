@@ -23,8 +23,8 @@ public class AppointmentMapper {
         appointment.setDate(appointmentDTO.getDate());
         appointment.setNote(appointmentDTO.getNote());
         appointment.setRescheduled(appointmentDTO.getRescheduled());
-        appointment.setClient(clientRepository.findOne(appointmentDTO.getClientId()));
-        appointment.setSubsidiary(subsidiaryRepository.findOne(appointmentDTO.getSubsidiaryId()));
+        appointment.setClient(clientRepository.findById(appointmentDTO.getClientId()).get());
+        appointment.setSubsidiary(subsidiaryRepository.findById(appointmentDTO.getSubsidiaryId()).get());
 
         return appointment;
 
@@ -38,8 +38,8 @@ public class AppointmentMapper {
         appointment.setDate(appointmentDTO.getDate());
         appointment.setNote(appointmentDTO.getNote());
         appointment.setRescheduled(appointmentDTO.getRescheduled());
-        appointment.setClient(clientRepository.findOne(appointmentDTO.getClientId()));
-        appointment.setSubsidiary(subsidiaryRepository.findOne(appointmentDTO.getSubsidiaryId()));
+        appointment.setClient(clientRepository.findById(appointmentDTO.getClientId()).get());
+        appointment.setSubsidiary(subsidiaryRepository.findById(appointmentDTO.getSubsidiaryId()).get());
 
         return appointment;
 

@@ -30,7 +30,7 @@ public class TransactionCouponMapper {
 
         transactionCoupon.setId(transactionCouponDTO.getId());
         transactionCoupon.setCode(transactionCouponDTO.getCode());
-        transactionCoupon.setTransaction(transactionRepository.findOne(transactionCouponDTO.getTransactionId()));
+        transactionCoupon.setTransaction(transactionRepository.findById(transactionCouponDTO.getTransactionId()).get());
 
         return transactionCoupon;
 

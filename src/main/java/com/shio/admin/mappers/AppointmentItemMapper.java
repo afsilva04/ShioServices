@@ -24,11 +24,12 @@ public class AppointmentItemMapper {
 
         appointmentItem.setId(appointmentItemDTO.getId());
         appointmentItem.setTime(appointmentItemDTO.getTime());
+        appointmentItem.setStarted(appointmentItemDTO.getStarted());
         appointmentItem.setStatus(appointmentItemDTO.getStatus());
-        appointmentItem.setAppointment(appointmentRepository.findOne(appointmentItemDTO.getAppointmentId()));
-        appointmentItem.setService(serviceRepository.findOne(appointmentItemDTO.getServiceId()));
+        appointmentItem.setAppointment(appointmentRepository.findById(appointmentItemDTO.getAppointmentId()).get());
+        appointmentItem.setService(serviceRepository.findById(appointmentItemDTO.getServiceId()).get());
         if(appointmentItemDTO.getEmployeeId() != null && appointmentItemDTO.getEmployeeId() != null)
-            appointmentItem.setEmployee(employeeRepository.findOne(appointmentItemDTO.getEmployeeId()));
+            appointmentItem.setEmployee(employeeRepository.findById(appointmentItemDTO.getEmployeeId()).get());
         else
             appointmentItem.setEmployee(null);
 
@@ -42,6 +43,7 @@ public class AppointmentItemMapper {
 
         appointmentItemDTO.setId(appointmentItem.getId());
         appointmentItemDTO.setTime(appointmentItem.getTime());
+        appointmentItemDTO.setStarted(appointmentItem.getStarted());
         appointmentItemDTO.setStatus(appointmentItem.getStatus());
         appointmentItemDTO.setServiceId(appointmentItem.getService().getId());
         appointmentItemDTO.setServiceName(appointmentItem.getService().getName());

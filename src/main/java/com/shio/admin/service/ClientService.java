@@ -31,7 +31,7 @@ public class ClientService {
     }
 
     public ClientDTO getClient(long clientId){
-        Client client = clientRepository.findOne(clientId);
+        Client client = clientRepository.findById(clientId).get();
         //City city = cityRepository.findOne(client.getCity().getId());
         //ClientDTO clientDTO = clientMapper.getClientDTOcity(client, city);
         ClientDTO clientDTO = clientMapper.getClientDTO(client);

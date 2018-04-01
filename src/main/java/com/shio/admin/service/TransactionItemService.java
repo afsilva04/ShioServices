@@ -35,7 +35,7 @@ public class TransactionItemService {
     }
 
     public TransactionItemDTO getSingle(Long id){
-        return transactionItemMapper.toDTO(transactionItemRepository.findOne(id));
+        return transactionItemMapper.toDTO(transactionItemRepository.findById(id).get());
     }
 
     public List<TransactionItem> getAllByTransactionAndId(Long transactionId, Long id){
@@ -51,7 +51,7 @@ public class TransactionItemService {
     }
 
     public void delete(Long id){
-        transactionItemRepository.delete(id);
+        transactionItemRepository.deleteById(id);
     }
 
 }

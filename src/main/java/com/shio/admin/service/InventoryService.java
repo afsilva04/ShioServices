@@ -29,7 +29,7 @@ public class InventoryService {
     }
 
     public InventoryDTO getSingle(Long id){
-        return inventoryMapper.toDTO(inventoryRepository.findOne(id));
+        return inventoryMapper.toDTO(inventoryRepository.findById(id).get());
     }
 
     public List<InventoryDTO> getAllBySubsidiary(Long subsidiaryId){
@@ -56,7 +56,7 @@ public class InventoryService {
     }
 
     public void substractInventoryByTransaction(Long id){
-        Transaction transaction = transactionRepository.findOne(id);
+        Transaction transaction = transactionRepository.findById(id).get();
         List<TransactionItem> transactionItems = transactionItemRepository.findAllByTransactionId(id);
 
         for (TransactionItem item : transactionItems) {
@@ -66,7 +66,7 @@ public class InventoryService {
     }
 
     public void addInventoryByTransaction(Long id){
-        Transaction transaction = transactionRepository.findOne(id);
+        Transaction transaction = transactionRepository.findById(id).get();
         List<TransactionItem> transactionItems = transactionItemRepository.findAllByTransactionId(id);
 
         for (TransactionItem item : transactionItems) {
@@ -76,7 +76,7 @@ public class InventoryService {
     }
 
     public void addInventoryByEntry(Long id){
-        Entry entry = entryRepository.findOne(id);
+        Entry entry = entryRepository.findById(id).get();
         List<EntryItem> entryItems = entryItemRepository.findAllByEntryId(id);
 
         for (EntryItem item: entryItems){
@@ -86,7 +86,7 @@ public class InventoryService {
     }
 
     public void substractInventoryByEntry(Long id){
-        Entry entry = entryRepository.findOne(id);
+        Entry entry = entryRepository.findById(id).get();
         List<EntryItem> entryItems = entryItemRepository.findAllByEntryId(id);
 
         for (EntryItem item: entryItems){
@@ -94,7 +94,5 @@ public class InventoryService {
                 substract(item.getProduct().getId(), entry.getSubsidiary().getId(), item.getQuantity());
         }
     }
-
-
 
 }

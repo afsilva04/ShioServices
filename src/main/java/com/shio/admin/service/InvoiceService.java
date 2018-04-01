@@ -38,7 +38,7 @@ public class InvoiceService {
 
         InvoiceDTO invoiceDTO = new InvoiceDTO();
 
-        invoiceDTO.setTransaction(transactionMapper.toDTO(transactionRepository.findOne(id)));
+        invoiceDTO.setTransaction(transactionMapper.toDTO(transactionRepository.findById(id).get()));
 
         invoiceDTO.setTransactionItems(transactionItemRepository.findAllByTransactionId(id)
                 .stream()
@@ -100,7 +100,7 @@ public class InvoiceService {
     public CfdiRequest getCfdiRequest(InvoiceData invoiceData){
 
         InvoiceDTO invoiceDTO = getInvoiceData(invoiceData.getTransactionId());
-        Transaction transaction = transactionRepository.findOne(invoiceData.getTransactionId());
+        Transaction transaction = transactionRepository.findById(invoiceData.getTransactionId()).get();
 
         CfdiRequest cfdiRequest = new CfdiRequest();
         //cfdiRequest.setSerie("F");
@@ -192,7 +192,7 @@ public class InvoiceService {
 
     public Transaction updateInvoiceToTransaction(InvoiceSatUpdate invoiceSatUpdate){
         TransactionDTO transactionDTO = transactionMapper.toDTO
-                (transactionRepository.findOne(invoiceSatUpdate.getTransaction()));
+                (transactionRepository.findById(invoiceSatUpdate.getTransaction()).get());
         if(invoiceSatUpdate.getInvoice().equals("0"))
             transactionDTO.setInvoice("");
         else

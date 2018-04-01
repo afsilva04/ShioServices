@@ -12,7 +12,7 @@ public class CompanyDTO {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String rfc;
     private String certificate;

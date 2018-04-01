@@ -67,21 +67,21 @@ public class TransactionItemMapper {
         transactionItem.setDateused(transactionItemDTO.getDateused());
 
         if (transactionItemDTO.getProductId() != null && transactionItemDTO.getProductId() != 0)
-            transactionItem.setProduct(productRepository.findOne(transactionItemDTO.getProductId()));
+            transactionItem.setProduct(productRepository.findById(transactionItemDTO.getProductId()).get());
         else
             transactionItem.setProduct(null);
 
         if (transactionItemDTO.getServiceId() != null && transactionItemDTO.getServiceId() != 0)
-            transactionItem.setService(serviceRepository.findOne(transactionItemDTO.getServiceId()));
+            transactionItem.setService(serviceRepository.findById(transactionItemDTO.getServiceId()).get());
         else
             transactionItem.setService(null);
 
         if (transactionItemDTO.getEmployeeId() != null && transactionItemDTO.getEmployeeId() != 0)
-            transactionItem.setEmployee(employeeRepository.findOne(transactionItemDTO.getEmployeeId()));
+            transactionItem.setEmployee(employeeRepository.findById(transactionItemDTO.getEmployeeId()).get());
         else
             transactionItem.setEmployee(null);
 
-        transactionItem.setTransaction(transactionRepository.findOne(transactionItemDTO.getTransactionId()));
+        transactionItem.setTransaction(transactionRepository.findById(transactionItemDTO.getTransactionId()).get());
 
         return transactionItem;
 

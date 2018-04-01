@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 
 @Entity
 @Table(name = "Appointment_Item")
@@ -11,10 +12,13 @@ import javax.persistence.*;
 public class AppointmentItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String time;
-    private String status;
+    private OffsetDateTime time;
+    private OffsetDateTime started;
+
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "service_id")

@@ -18,7 +18,7 @@ public class ServiceService {
     }
 
     public Sservice getSingle(Long id){
-        return serviceRepository.findOne(id);
+        return serviceRepository.findById(id).get();
     }
 
     public Sservice create(Sservice sservice){

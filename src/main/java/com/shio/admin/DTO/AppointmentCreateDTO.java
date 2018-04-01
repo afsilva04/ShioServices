@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -13,9 +15,9 @@ public class AppointmentCreateDTO {
     @Id
     @GeneratedValue
     private Long id;
-    private String date;
+    private OffsetDateTime date;
     private String note;
-    private String rescheduled;
+    private Boolean rescheduled;
     private Long clientId;
     private Long subsidiaryId;
 

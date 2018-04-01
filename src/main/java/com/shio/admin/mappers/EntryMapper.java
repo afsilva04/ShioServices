@@ -50,7 +50,7 @@ public class EntryMapper {
         entry.setConfirmed(entryDTO.getConfirmed());
 
         if (entryDTO.getSubsidiaryId() != null && entryDTO.getSubsidiaryId() != 0)
-            entry.setSubsidiary(subsidiaryRepository.findOne(entryDTO.getSubsidiaryId()));
+            entry.setSubsidiary(subsidiaryRepository.findById(entryDTO.getSubsidiaryId()).get());
         else
             entry.setSubsidiary(null);
 

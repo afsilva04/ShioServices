@@ -16,7 +16,7 @@ import java.util.Set;
 public class Client {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull(groups = Existing.class, message = "Se requiere el ID")
     @Null(groups = New.class, message = "El ID debe ser nulo")
     private Long id;

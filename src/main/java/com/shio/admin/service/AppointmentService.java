@@ -39,7 +39,7 @@ public class AppointmentService {
     }*/
 
     public AppointmentViewDTO getSingle(Long id){
-        return appointmentMapper.EntityToViewDTO(appointmentRepository.findOne(id));
+        return appointmentMapper.EntityToViewDTO(appointmentRepository.findById(id).get());
     }
 
     public Appointment create(AppointmentViewDTO appointment){
@@ -52,7 +52,7 @@ public class AppointmentService {
     }
 
     public Transaction createTransaction(Long id){
-        Appointment appointment = appointmentRepository.findOne(id);
+        Appointment appointment = appointmentRepository.findById(id).get();
 
         TransactionDTO transactionDTO = new TransactionDTO();
         transactionDTO.setDate(LocalDate.now().toString());

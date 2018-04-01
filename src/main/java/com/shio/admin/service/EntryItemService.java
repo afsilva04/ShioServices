@@ -32,7 +32,7 @@ public class EntryItemService {
     }
 
     public EntryItemDTO getSingle(Long id){
-        return entryItemMapper.toDTO(entryItemRepository.findOne(id));
+        return entryItemMapper.toDTO(entryItemRepository.findById(id).get());
     }
 
     public List<EntryItem> getAllByEntryAndId(Long entryId, Long id){
@@ -48,7 +48,7 @@ public class EntryItemService {
     }
 
     public void delete(Long id){
-        entryItemRepository.delete(id);
+        entryItemRepository.deleteById(id);
     }
 
 }

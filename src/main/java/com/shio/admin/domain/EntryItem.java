@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class EntryItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
 

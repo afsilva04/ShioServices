@@ -12,8 +12,8 @@ import java.util.Set;
 public class Company {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String rfc;
     private String certificate;

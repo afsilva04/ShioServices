@@ -18,7 +18,7 @@ public class ProductService {
     }
 
     public Product getSingle(Long id){
-        return productRepository.findOne(id);
+        return productRepository.findById(id).get();
     }
 
     public Product create(Product product){

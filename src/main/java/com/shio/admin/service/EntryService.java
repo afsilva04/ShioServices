@@ -25,7 +25,7 @@ public class EntryService {
     }
 
     public EntryDTO getSingle(Long id){
-        return entryMapper.toDTO(entryRepository.findOne(id));
+        return entryMapper.toDTO(entryRepository.findById(id).get());
     }
 
     public Entry create(EntryDTO entryDTO){
@@ -37,7 +37,7 @@ public class EntryService {
     }
 
     public EntryDTO confirmEntry(Long id){
-        Entry entry = entryRepository.findOne(id);
+        Entry entry = entryRepository.findById(id).get();
         entry.setConfirmed(1);
         entryRepository.save(entry);
         return entryMapper.toDTO(entry);

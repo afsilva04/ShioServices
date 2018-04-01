@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Entity
@@ -12,11 +14,12 @@ import java.util.Set;
 public class Appointment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
+    @Column(name = "date", columnDefinition = "DATE")
+    private OffsetDateTime date;
     private String note;
-    private String rescheduled;
+    private Boolean rescheduled;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clientId")

@@ -18,7 +18,7 @@ public class EmployeeService {
     }
 
     public Employee getSingle(Long id){
-        return employeeRepository.findOne(id);
+        return employeeRepository.findById(id).get();
     }
 
     public Employee create(Employee employee){

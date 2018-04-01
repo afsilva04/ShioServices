@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Coupon {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String code;
     private int quantity;

@@ -16,7 +16,6 @@ import java.util.Set;
 @Data
 public class Country {
 
-    //@Column(name = "country_id")
     @Id
     private long id;
     private String name;

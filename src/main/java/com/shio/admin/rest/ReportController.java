@@ -1,5 +1,6 @@
 package com.shio.admin.rest;
 
+import com.shio.admin.DTO.AppointmentsReportDTO;
 import com.shio.admin.DTO.SalesReportDTO;
 import com.shio.admin.service.ReportService;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,14 @@ public class ReportController {
     public List<SalesReportDTO> salesReport(){
         return reportService.salesReport();
     }
+
+    @GetMapping("/appointments")
+    public List<AppointmentsReportDTO> appointmentReport() { return reportService.appointmentsReport(); }
+
+    @GetMapping("/close")
+    public List<SalesReportDTO> closeReport() { return reportService.closeReport(); }
+
+    @GetMapping("/day")
+    public List<SalesReportDTO> dayReport() { return reportService.dayReport(); }
 
 }

@@ -59,17 +59,17 @@ public class CouponMapper {
         coupon.setTransactionused(couponDTO.getTransactionused());
 
         if(couponDTO.getProductId() != null && couponDTO.getProductId() != 0)
-            coupon.setProduct(productRepository.findOne(couponDTO.getProductId()));
+            coupon.setProduct(productRepository.findById(couponDTO.getProductId()).get());
         else
             coupon.setProduct(null);
 
         if(couponDTO.getServiceId() != null && couponDTO.getServiceId() != 0)
-            coupon.setService(serviceRepository.findOne(couponDTO.getServiceId()));
+            coupon.setService(serviceRepository.findById(couponDTO.getServiceId()).get());
         else
             coupon.setService(null);
 
         if(couponDTO.getClientId() != null && couponDTO.getClientId() != 0)
-            coupon.setClient(clientRepository.findOne(couponDTO.getClientId()));
+            coupon.setClient(clientRepository.findById(couponDTO.getClientId()).get());
         else
             coupon.setClient(null);
 

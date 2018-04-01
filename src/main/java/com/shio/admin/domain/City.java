@@ -16,7 +16,6 @@ import java.util.Set;
 @Data
 public class City {
 
-    //@Column(name = "city_id")
     @Id
     private long id;
     private String name;

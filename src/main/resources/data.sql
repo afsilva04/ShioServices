@@ -61,11 +61,11 @@ VALUES ('Corte Mujer', '', '123123', '15', '1', '500', '20', '53131638', 'XUN');
 
 --APPOINTMENT
 INSERT INTO appointment (date, note, rescheduled, client_id, subsidiary_id)
-VALUES ('2018-03-03', 'Notas', '1', '1', '2');
+VALUES ('2018-03-03', 'Notas', 'true', '1', '2');
 
 --APPOINTMENT ITEM
-INSERT INTO appointment_item (time, status, service_id, employee_id, appointment_id)
-VALUES ('10:15', '1', '1', '1', '1');
+INSERT INTO appointment_item (time, started, status, service_id, employee_id, appointment_id)
+VALUES ('2018-03-03 10:15:00', '2018-03-03 10:17:00', 'Iniciada', '1', '1', '1');
 
 --TRANSACTION
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)

@@ -45,8 +45,8 @@ public class TransactionMapper {
         transaction.setCanceled(transactionDTO.getCanceled());
         transaction.setProcessed(transactionDTO.getProcessed());
         transaction.setReason(transactionDTO.getReasonId());
-        transaction.setClient(clientRepository.findOne(transactionDTO.getClientId()));
-        transaction.setSubsidiary(subsidiaryRepository.findOne(transactionDTO.getSubsidiaryId()));
+        transaction.setClient(clientRepository.findById(transactionDTO.getClientId()).get());
+        transaction.setSubsidiary(subsidiaryRepository.findById(transactionDTO.getSubsidiaryId()).get());
 
         return transaction;
 

@@ -35,8 +35,8 @@ public class InventoryMapper {
 
         inventory.setId(inventoryDTO.getId());
         inventory.setQuantity(inventoryDTO.getQuantity());
-        inventory.setProduct(productRepository.findOne(inventoryDTO.getProductId()));
-        inventory.setSubsidiary(subsidiaryRepository.findOne(inventoryDTO.getSubsidiaryId()));
+        inventory.setProduct(productRepository.findById(inventoryDTO.getProductId()).get());
+        inventory.setSubsidiary(subsidiaryRepository.findById(inventoryDTO.getSubsidiaryId()).get());
 
         return inventory;
 

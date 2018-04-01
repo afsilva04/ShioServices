@@ -35,7 +35,7 @@ public class CouponService {
     }
 
     public CouponDTO getSingle(Long id){
-        return couponMapper.toDTO(couponRepository.findOne(id));
+        return couponMapper.toDTO(couponRepository.findById(id).get());
     }
 
     public List<CouponDTO> getAvailable(){
@@ -54,7 +54,7 @@ public class CouponService {
     }
 
     public List<CouponDTO> generateCoupons(Long transactionId){
-        Transaction transaction = transactionRepository.findOne(transactionId);
+        Transaction transaction = transactionRepository.findById(transactionId).get();
         List<TransactionItemDTO> transactionItemDTOS =
                 transactionItemRepository.findAllByTransactionId(transactionId)
                         .stream()

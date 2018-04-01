@@ -36,12 +36,12 @@ public class EntryItemMapper {
         entryItem.setQuantity(entryItemDTO.getQuantity());
 
         if(entryItemDTO.getProductId() != null && entryItemDTO.getProductId() != 0)
-            entryItem.setProduct(productRepository.findOne(entryItemDTO.getProductId()));
+            entryItem.setProduct(productRepository.findById(entryItemDTO.getProductId()).get());
         else
             entryItem.setProduct(null);
 
         if(entryItemDTO.getEntryId() != null && entryItemDTO.getEntryId() != 0)
-            entryItem.setEntry(entryRepository.findOne(entryItemDTO.getEntryId()));
+            entryItem.setEntry(entryRepository.findById(entryItemDTO.getEntryId()).get());
         else
             entryItem.setEntry(null);
 

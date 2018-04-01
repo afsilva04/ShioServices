@@ -42,7 +42,7 @@ public class TransactionCouponService {
     }
 
     public TransactionCouponDTO getSingle(Long id){
-        return transactionCouponMapper.toDTO(transactionCouponRepository.findOne(id));
+        return transactionCouponMapper.toDTO(transactionCouponRepository.findById(id).get());
     }
 
     public TransactionCoupon create (TransactionCouponDTO transactionCouponDTO){
@@ -54,7 +54,7 @@ public class TransactionCouponService {
     }
 
     public void delete(Long id){
-        transactionCouponRepository.delete(id);
+        transactionCouponRepository.deleteById(id);
     }
 
     public List<CouponDTO> getActiveCoupons(){

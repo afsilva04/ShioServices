@@ -33,7 +33,7 @@ public class TransactionService {
     }
 
     public TransactionDTO getSingle(Long id){
-        return transactionMapper.toDTO(transactionRepository.findOne(id));
+        return transactionMapper.toDTO(transactionRepository.findById(id).get());
     }
 
     public Transaction create(TransactionDTO transaction){
@@ -45,7 +45,7 @@ public class TransactionService {
     }
 
     public Transaction generateCoupons(Long transactionId){
-        Transaction transaction = transactionRepository.findOne(transactionId);
+        Transaction transaction = transactionRepository.findById(transactionId).get();
         List<TransactionItemDTO> transactionItemDTOS =
                 transactionItemRepository.findAllByTransactionId(transactionId)
                 .stream()
@@ -72,7 +72,7 @@ public class TransactionService {
     }
 
     public Transaction confirm(Long id){
-        Transaction transaction = transactionRepository.findOne(id);
+        Transaction transaction = transactionRepository.findById(id).get();
         transaction.setInvoice("1");
         return transactionRepository.save(transaction);
     }
