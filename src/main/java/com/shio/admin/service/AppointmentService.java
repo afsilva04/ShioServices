@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,7 +56,7 @@ public class AppointmentService {
         Appointment appointment = appointmentRepository.findById(id).get();
 
         TransactionDTO transactionDTO = new TransactionDTO();
-        transactionDTO.setDate(LocalDate.now().toString());
+        transactionDTO.setDate(OffsetDateTime.now());
         transactionDTO.setReasonId("1"); //Venta
         transactionDTO.setClientId(appointment.getClient().getId());
         transactionDTO.setSubsidiaryId(appointment.getSubsidiary().getId());

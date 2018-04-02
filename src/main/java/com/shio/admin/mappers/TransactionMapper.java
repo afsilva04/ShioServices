@@ -25,8 +25,10 @@ public class TransactionMapper {
         transactionDTO.setCanceled(transaction.getCanceled());
         transactionDTO.setProcessed(transaction.getProcessed());
         transactionDTO.setReasonId(transaction.getReason());
-        transactionDTO.setClientId(transaction.getClient().getId());
-        transactionDTO.setClientName(transaction.getClient().getName());
+        if(transaction.getClient() != null) {
+            transactionDTO.setClientId(transaction.getClient().getId());
+            transactionDTO.setClientName(transaction.getClient().getName());
+        }
         transactionDTO.setSubsidiaryId(transaction.getSubsidiary().getId());
         transactionDTO.setSubsidiaryName(transaction.getSubsidiary().getName());
 
@@ -45,7 +47,8 @@ public class TransactionMapper {
         transaction.setCanceled(transactionDTO.getCanceled());
         transaction.setProcessed(transactionDTO.getProcessed());
         transaction.setReason(transactionDTO.getReasonId());
-        transaction.setClient(clientRepository.findById(transactionDTO.getClientId()).get());
+        if(transactionDTO.getClientId() != null && transactionDTO.getClientId() != 0)
+            transaction.setClient(clientRepository.findById(transactionDTO.getClientId()).get());
         transaction.setSubsidiary(subsidiaryRepository.findById(transactionDTO.getSubsidiaryId()).get());
 
         return transaction;

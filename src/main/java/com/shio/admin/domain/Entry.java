@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,7 @@ public class Entry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
+    private OffsetDateTime date;
     private int confirmed;
 
     @ManyToOne(fetch = FetchType.EAGER)

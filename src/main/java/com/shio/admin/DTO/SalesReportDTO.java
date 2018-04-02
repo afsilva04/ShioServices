@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
 public class SalesReportDTO {
 
-    private String date;
+    private OffsetDateTime date;
     private Long productId;
     private String productName;
     private Long serviceId;

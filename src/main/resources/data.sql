@@ -69,10 +69,10 @@ VALUES ('2018-03-03 10:15:00', '2018-03-03 10:17:00', 'Iniciada', '1', '1', '1')
 
 --TRANSACTION
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
-VALUES ('2018-03-03', '123123', '', 'true', 'true', '1', '1', '1');
+VALUES ('2018-03-03', '123123', '', 'false', 'true', '1', '1', '1');
 
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
-VALUES ('2018-03-08', '', '', 'true', 'true', '1', '1', '1');
+VALUES ('2018-03-08', '', '', 'false', 'false', '1', '1', '1');
 
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
 VALUES ('2018-03-12', '', '', 'false', 'false', '2', '2', '3');

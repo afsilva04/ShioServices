@@ -10,6 +10,7 @@ import com.shio.admin.persistence.ClientRepository;
 import com.shio.admin.persistence.TransactionItemRepository;
 import com.shio.admin.persistence.TransactionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class InvoiceService {
     private TransactionItemMapper transactionItemMapper;
     private RestTemplate restTemplate;
     private ObjectMapper objectMapper;
+    private Environment environment;
 
     public InvoiceDTO getInvoiceData(Long id){
 
@@ -45,7 +47,21 @@ public class InvoiceService {
                 .map(i -> transactionItemMapper.toDTO(i))
                 .collect(Collectors.toList()));
 
-        invoiceDTO.setSubtotal(invoiceDTO.getTransactionItems()
+        invoiceDTO.setTotal(invoiceDTO.getTransactionItems()
+                .stream()
+                .map(t -> t.getPrice().multiply((new BigDecimal(t.getQuantity()))))
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, BigDecimal.ROUND_UP));
+
+        invoiceDTO.setSubtotal(invoiceDTO.getTotal()
+                .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_UP)
+                .setScale(2, BigDecimal.ROUND_UP));
+
+        invoiceDTO.setTax(invoiceDTO.getTotal()
+                .subtract(invoiceDTO.getSubtotal())
+                .setScale(2, BigDecimal.ROUND_UP));
+
+        /*invoiceDTO.setSubtotal(invoiceDTO.getTransactionItems()
                 .stream()
                 .map(s -> s.getPrice().multiply((new BigDecimal(s.getQuantity()))).add(s.getAditional()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
@@ -57,7 +73,7 @@ public class InvoiceService {
 
         invoiceDTO.setTotal(invoiceDTO.getSubtotal()
                 .add(invoiceDTO.getTax())
-                .setScale(2, BigDecimal.ROUND_UP));
+                .setScale(2, BigDecimal.ROUND_UP));*/
 
         return invoiceDTO;
     }
@@ -71,8 +87,9 @@ public class InvoiceService {
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Cookie", "xnovatech_session=9m45hicpg907u1v6aqbnfjibrpt6dmq4");
-            headers.add("api-usuario", "demo33");
-            headers.add("api-password", "demo");
+            //headers.add("api-usuario", "demo33");
+            headers.add("api-usuario", environment.getProperty("timbrado.user"));
+            headers.add("api-password", environment.getProperty("timbrado.password"));
             headers.add("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
             headers.add("Accept", "application/jsonp");
 
@@ -140,7 +157,7 @@ public class InvoiceService {
         cfdiRequest.setReceptor(receptor);
 
         BigDecimal itemTotal;
-        BigDecimal tax = new BigDecimal(0.16).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        BigDecimal tax = new BigDecimal(0.16).setScale(2, BigDecimal.ROUND_HALF_DOWN);
         ArrayList<Concepto> conceptos = new ArrayList<>();
         for (TransactionItemDTO item: invoiceDTO.getTransactionItems()){
             itemTotal = BigDecimal.ZERO;
@@ -155,8 +172,11 @@ public class InvoiceService {
                 concepto.setDescripcion(item.getProductName());
             else
                 concepto.setDescripcion(item.getServiceName());
-            concepto.setValorUnitario(item.getPrice().toString());
-            itemTotal = item.getPrice().multiply(new BigDecimal(item.getQuantity()));
+            concepto.setValorUnitario(item.getPrice()
+                    .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_HALF_DOWN)
+                    .toString());
+            itemTotal = item.getPrice().multiply(new BigDecimal(item.getQuantity()))
+                .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_HALF_DOWN);
             concepto.setImporte(itemTotal.toString());
 
             ImpuestoConcepto impuestoConcepto = new ImpuestoConcepto();
@@ -165,7 +185,10 @@ public class InvoiceService {
             traslado.setImpuesto("002");
             traslado.setTipoFactor("Tasa");
             traslado.setTasaOCuota(tax.toString());
-            traslado.setImporte(itemTotal.multiply(tax).toString());
+            //traslado.setImporte(itemTotal.multiply(tax).toString());
+            traslado.setImporte(item.getPrice().multiply(new BigDecimal(item.getQuantity()))
+                    .subtract(itemTotal)
+                    .toString());
             ArrayList<Traslado> traslados = new ArrayList<>();
             traslados.add(traslado);
             impuestoConcepto.setTraslados(traslados);
@@ -198,6 +221,7 @@ public class InvoiceService {
         else
             transactionDTO.setInvoice(invoiceSatUpdate.getInvoice());
         transactionDTO.setInvoicePdf(invoiceSatUpdate.getPdf());
+        transactionDTO.setProcessed(true);
         return transactionRepository.save(transactionMapper.toEntity(transactionDTO));
     }
 

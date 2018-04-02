@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ public class TransactionDTO {
     @Id
     @GeneratedValue
     private Long id;
-    private String date;
+    private OffsetDateTime date;
     private String invoice;
     private String invoicePdf;
     private Boolean canceled;

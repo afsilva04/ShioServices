@@ -60,7 +60,7 @@ public class InventoryService {
         List<TransactionItem> transactionItems = transactionItemRepository.findAllByTransactionId(id);
 
         for (TransactionItem item : transactionItems) {
-            if(item.getProduct() != null)
+            if(item.getProduct() != null) // && (item.getAnticipated() == null || !item.getAnticipated()))
                 substract(item.getProduct().getId(), transaction.getSubsidiary().getId(), item.getQuantity());
         }
     }

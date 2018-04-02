@@ -3,6 +3,7 @@ package com.shio.admin.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Entity
@@ -13,7 +14,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String date;
+    private OffsetDateTime date;
     private String invoice;
     private String invoicepdf;
     private Boolean canceled;

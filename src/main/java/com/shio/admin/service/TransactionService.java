@@ -74,6 +74,7 @@ public class TransactionService {
     public Transaction confirm(Long id){
         Transaction transaction = transactionRepository.findById(id).get();
         transaction.setInvoice("1");
+        transaction.setProcessed(true);
         return transactionRepository.save(transaction);
     }
 

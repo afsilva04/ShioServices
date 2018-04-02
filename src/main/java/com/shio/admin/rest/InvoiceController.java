@@ -1,5 +1,6 @@
 package com.shio.admin.rest;
 
+import com.shio.admin.DTO.CfdiRequest;
 import com.shio.admin.DTO.InvoiceDTO;
 import com.shio.admin.DTO.InvoiceData;
 import com.shio.admin.DTO.InvoiceSatUpdate;
@@ -19,6 +20,11 @@ public class InvoiceController {
     @GetMapping("{idTransaction}")
     public InvoiceDTO getInvoiceInfo(@PathVariable("idTransaction") Long idTransaction){
         return invoiceService.getInvoiceData(idTransaction);
+    }
+
+    @GetMapping("request/{id}")
+    public CfdiRequest getRequest(@PathVariable("id") Long id){
+        return invoiceService.getCfdiRequest(new InvoiceData(id, null, null, null));
     }
 
     @PostMapping
