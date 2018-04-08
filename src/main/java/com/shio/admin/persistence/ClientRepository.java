@@ -10,5 +10,5 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     Optional<Client> findById(long id);
 
-    List<Client> findByNameContainingOrPhoneContaining(String name, String phone);
+    List<Client> findByNameContainingIgnoreCaseOrPhoneContaining(String name, String phone);
 }

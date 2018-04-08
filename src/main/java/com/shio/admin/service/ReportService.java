@@ -1,8 +1,10 @@
 package com.shio.admin.service;
 
+import com.shio.admin.DTO.AppointmentsInProgressReportDTO;
 import com.shio.admin.DTO.AppointmentsReportDTO;
 import com.shio.admin.DTO.SalesReportDTO;
 import com.shio.admin.domain.AppointmentItem;
+import com.shio.admin.domain.StatusEnum;
 import com.shio.admin.domain.TransactionItem;
 import com.shio.admin.persistence.AppointmentItemRepository;
 import com.shio.admin.persistence.TransactionItemRepository;
@@ -10,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,15 +153,52 @@ public class ReportService {
 
         for (AppointmentItem item: appointmentItems) {
             AppointmentsReportDTO appointmentsReportDTO = new AppointmentsReportDTO();
+
+            appointmentsReportDTO.setAppointmentId(item.getAppointment().getId());
+            appointmentsReportDTO.setAppointmentItemId(item.getId());
             appointmentsReportDTO.setStatus(item.getStatus());
             appointmentsReportDTO.setTime(item.getTime());
             appointmentsReportDTO.setServiceName(item.getService().getName());
             appointmentsReportDTO.setClientName(item.getAppointment().getClient().getName());
+            appointmentsReportDTO.setEmployeeName(item.getEmployee().getName());
             appointmentsReportDTO.setSubsidiaryName(item.getAppointment().getSubsidiary().getName());
+
             appointmentsReportDTOS.add(appointmentsReportDTO);
         }
 
         return appointmentsReportDTOS;
+    }
+
+    public List<AppointmentsInProgressReportDTO> appointmentsInProgressReport(){
+        List<AppointmentItem> appointmentItems = appointmentItemRepository.findAll();
+        List<AppointmentsInProgressReportDTO> appointmentsInProgressReportDTOS =
+                new ArrayList<AppointmentsInProgressReportDTO>();
+
+        for (AppointmentItem item: appointmentItems) {
+            if(item.getStatus() == StatusEnum.Iniciada) {
+                AppointmentsInProgressReportDTO appointmentsInProgressReportDTO = new AppointmentsInProgressReportDTO();
+
+                appointmentsInProgressReportDTO.setAppointmentId(item.getAppointment().getId());
+                appointmentsInProgressReportDTO.setAppointmentItemId(item.getId());
+                appointmentsInProgressReportDTO.setStatus(item.getStatus());
+                appointmentsInProgressReportDTO.setStarted(item.getStarted());
+
+                int diff = (int) (OffsetDateTime.now().toEpochSecond() - item.getStarted().toEpochSecond()) / 60;
+                int left = Integer.parseInt(item.getService().getTime()) - diff;
+                appointmentsInProgressReportDTO.setMinutesLeft(left);
+
+                appointmentsInProgressReportDTO.setServiceName(item.getService().getName());
+                appointmentsInProgressReportDTO.setClientName(item.getAppointment().getClient().getName());
+                if (item.getEmployee() != null) {
+                    appointmentsInProgressReportDTO.setEmployeeName(item.getEmployee().getName());
+                }
+                appointmentsInProgressReportDTO.setSubsidiaryName(item.getAppointment().getSubsidiary().getName());
+
+                appointmentsInProgressReportDTOS.add(appointmentsInProgressReportDTO);
+            }
+        }
+
+        return appointmentsInProgressReportDTOS;
     }
 
 }

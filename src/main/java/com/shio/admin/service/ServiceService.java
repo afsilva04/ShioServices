@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -15,6 +16,14 @@ public class ServiceService {
 
     public List<Sservice> getAll(){
         return serviceRepository.findAll();
+    }
+
+    public List<Sservice> getServices(String searchTxt){
+        if(searchTxt.isEmpty()){
+            return serviceRepository.findAll();
+        } else {
+            return serviceRepository.findByNameContainingIgnoreCase(searchTxt);
+        }
     }
 
     public Sservice getSingle(Long id){

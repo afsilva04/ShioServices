@@ -65,7 +65,7 @@ VALUES ('2018-03-03', 'Notas', 'true', '1', '2');
 
 --APPOINTMENT ITEM
 INSERT INTO appointment_item (time, started, status, service_id, employee_id, appointment_id)
-VALUES ('2018-03-03 10:15:00', '2018-03-03 10:17:00', 'Iniciada', '1', '1', '1');
+VALUES ('2018-03-03 10:15:00', '2018-04-08 23:35:00', 'Iniciada', '1', '1', '1');
 
 --TRANSACTION
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)

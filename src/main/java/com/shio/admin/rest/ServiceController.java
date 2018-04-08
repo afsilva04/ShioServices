@@ -20,6 +20,11 @@ public class ServiceController {
         return serviceService.getAll();
     }
 
+    @GetMapping("/search")
+    public List<Sservice> getAll(@RequestParam(value = "search_txt", required = false) String searchTxt) {
+        return serviceService.getServices(searchTxt);
+    }
+
     @GetMapping("/{id}")
     public Sservice getSingle(@PathVariable("id") Long id){
         return serviceService.getSingle(id);

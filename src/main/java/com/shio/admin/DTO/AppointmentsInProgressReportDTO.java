@@ -8,12 +8,13 @@ import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-public class AppointmentsReportDTO {
+public class AppointmentsInProgressReportDTO {
 
     private Long appointmentId;
     private Long appointmentItemId;
-    private OffsetDateTime time;
     private StatusEnum status;
+    private OffsetDateTime started;
+    private int minutesLeft;
     private String serviceName;
     private String clientName;
     private String employeeName;

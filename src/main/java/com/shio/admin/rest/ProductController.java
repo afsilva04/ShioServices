@@ -20,6 +20,11 @@ public class ProductController {
         return productService.getAll();
     }
 
+    @GetMapping("/search")
+    public List<Product> getAll(@RequestParam(value = "search_txt", required = false) String searchTxt) {
+        return productService.getServices(searchTxt);
+    }
+
     @GetMapping("/{id}")
     public Product getSingle(@PathVariable("id") Long id){
         return productService.getSingle(id);

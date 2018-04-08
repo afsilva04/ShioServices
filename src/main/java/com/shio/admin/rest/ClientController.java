@@ -23,11 +23,10 @@ public class ClientController {
         return clientService.getAll();
     }
 
-    /*
-    @GetMapping()
+    @GetMapping("/search")
     public List<ClientDTO> getAll(@RequestParam(value = "search_txt", required = false) String searchTxt) {
         return clientService.getClients(searchTxt);
-    }*/
+    }
 
     @GetMapping("/{client_id}")
     public ClientDTO getSingle(@PathVariable("client_id") long clientId) {
@@ -35,7 +34,7 @@ public class ClientController {
     }
 
     @PostMapping()
-    public Client create(@Validated(Client.New.class) @RequestBody Client client) {
+    public Client create(@Validated(Client.New.class) @RequestBody ClientDTO client) {
         return clientService.createClient(client);
     }
 
@@ -51,7 +50,7 @@ public class ClientController {
     }*/
 
     @PutMapping()
-    public Client update(@Validated(Client.Existing.class) @RequestBody Client client) {
+    public Client update(@Validated(Client.Existing.class) @RequestBody ClientDTO client) {
         return clientService.updateClient(client);
     }
 

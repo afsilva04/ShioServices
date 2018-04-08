@@ -1,5 +1,6 @@
 package com.shio.admin.rest;
 
+import com.shio.admin.DTO.AppointmentsInProgressReportDTO;
 import com.shio.admin.DTO.AppointmentsReportDTO;
 import com.shio.admin.DTO.SalesReportDTO;
 import com.shio.admin.service.ReportService;
@@ -26,6 +27,11 @@ public class ReportController {
 
     @GetMapping("/appointments")
     public List<AppointmentsReportDTO> appointmentReport() { return reportService.appointmentsReport(); }
+
+    @GetMapping("/appointments-in-progress")
+    public List<AppointmentsInProgressReportDTO> appointmentsInProgress() {
+        return reportService.appointmentsInProgressReport();
+    }
 
     @GetMapping("/close")
     public List<SalesReportDTO> closeReport() { return reportService.closeReport(); }

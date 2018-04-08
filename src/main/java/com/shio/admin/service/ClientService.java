@@ -26,14 +26,14 @@ public class ClientService {
     }
 
     public List<ClientDTO> getAll(){
-        return clientRepository.findAll().stream().
-                map(n -> clientMapper.getClientDTO(n)).collect(Collectors.toList());
+        return clientRepository.findAll()
+                .stream()
+                .map(n -> clientMapper.getClientDTO(n))
+                .collect(Collectors.toList());
     }
 
     public ClientDTO getClient(long clientId){
         Client client = clientRepository.findById(clientId).get();
-        //City city = cityRepository.findOne(client.getCity().getId());
-        //ClientDTO clientDTO = clientMapper.getClientDTOcity(client, city);
         ClientDTO clientDTO = clientMapper.getClientDTO(client);
         return clientDTO;
     }
@@ -43,17 +43,17 @@ public class ClientService {
             return clientRepository.findAll().stream().
                     map(n -> clientMapper.getClientDTO(n)).collect(Collectors.toList());
         } else {
-            return clientRepository.findByNameContainingOrPhoneContaining(searchTxt, searchTxt).stream().
+            return clientRepository.findByNameContainingIgnoreCaseOrPhoneContaining(searchTxt, searchTxt).stream().
                     map(n -> clientMapper.getClientDTO(n)).collect(Collectors.toList());
         }
     }
 
-    public Client createClient(Client client){
-        return clientRepository.save(client);
+    public Client createClient(ClientDTO client){
+        return clientRepository.save(clientMapper.toEntity(client));
     }
 
-    public Client updateClient(Client client){
-        return clientRepository.save(client);
+    public Client updateClient(ClientDTO client){
+        return clientRepository.save(clientMapper.toEntity(client));
     }
 
 }

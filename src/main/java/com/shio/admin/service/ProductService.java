@@ -17,6 +17,14 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public List<Product> getServices(String searchTxt){
+        if(searchTxt.isEmpty()){
+            return productRepository.findAll();
+        } else {
+            return productRepository.findByNameContainingIgnoreCase(searchTxt);
+        }
+    }
+
     public Product getSingle(Long id){
         return productRepository.findById(id).get();
     }
