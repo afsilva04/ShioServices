@@ -1,8 +1,6 @@
 package com.shio.admin.rest;
 
-import com.shio.admin.DTO.AppointmentsInProgressReportDTO;
-import com.shio.admin.DTO.AppointmentsReportDTO;
-import com.shio.admin.DTO.SalesReportDTO;
+import com.shio.admin.DTO.*;
 import com.shio.admin.service.ReportService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,7 +32,7 @@ public class ReportController {
     }
 
     @GetMapping("/close")
-    public List<SalesReportDTO> closeReport() { return reportService.closeReport(); }
+    public CloseReportResumeDTO closeReport() { return reportService.closeReport(); }
 
     @GetMapping("/day")
     public List<SalesReportDTO> dayReport() { return reportService.dayReport(); }

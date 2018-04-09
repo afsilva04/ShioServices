@@ -1,8 +1,6 @@
 package com.shio.admin.service;
 
-import com.shio.admin.DTO.AppointmentsInProgressReportDTO;
-import com.shio.admin.DTO.AppointmentsReportDTO;
-import com.shio.admin.DTO.SalesReportDTO;
+import com.shio.admin.DTO.*;
 import com.shio.admin.domain.AppointmentItem;
 import com.shio.admin.domain.StatusEnum;
 import com.shio.admin.domain.TransactionItem;
@@ -67,44 +65,63 @@ public class ReportService {
         return salesReportDTOS;
     }
 
-    public List<SalesReportDTO> closeReport(){
+    public CloseReportResumeDTO closeReport(){
 
         List<TransactionItem> transactionItems = transactionItemRepository.findAll();
-        List<SalesReportDTO> salesReportDTOS = new ArrayList<>();
+        List<CloseReportDTO> closeReportDTOS = new ArrayList<>();
+
+        BigDecimal commissionResume  = new BigDecimal(0);
+        BigDecimal totalResume = new BigDecimal(0);
 
         for (TransactionItem item : transactionItems) {
-            SalesReportDTO salesReportDTO = new SalesReportDTO();
-            salesReportDTO.setDate(item.getTransaction().getDate());
-            if (item.getProduct() != null) {
-                salesReportDTO.setProductId(item.getProduct().getId());
-                salesReportDTO.setProductName(item.getProduct().getName());
-                salesReportDTO.setCommision(item.getProduct().getCommission());
-            }
-            if (item.getService() != null) {
-                salesReportDTO.setServiceId(item.getService().getId());
-                salesReportDTO.setServiceName(item.getService().getName());
-                salesReportDTO.setCommision(item.getService().getCommission());
-            }
-            salesReportDTO.setQuantity(item.getQuantity());
-            salesReportDTO.setPrice(item.getPrice());
-            salesReportDTO.setTotal(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
-            if (item.getTransaction().getClient() != null) {
-                salesReportDTO.setClientId(item.getTransaction().getClient().getId());
-                salesReportDTO.setClientName(item.getTransaction().getClient().getName());
-            }
-            if(item.getEmployee() != null){
-                salesReportDTO.setEmployeeId(item.getEmployee().getId());
-                salesReportDTO.setEmployeeName(item.getEmployee().getName());
-            }
-            if (item.getTransaction().getSubsidiary() != null) {
-                salesReportDTO.setSubsidiaryId(item.getTransaction().getSubsidiary().getId());
-                salesReportDTO.setSubsidiaryName(item.getTransaction().getSubsidiary().getName());
-            }
+            if(item.getTransaction().getReason() == "1" || item.getTransaction().getReason() == "2") {
+                CloseReportDTO closeReportDTO = new CloseReportDTO();
 
-            salesReportDTOS.add(salesReportDTO);
+                closeReportDTO.setReason(item.getTransaction().getReason());
+                closeReportDTO.setDate(item.getTransaction().getDate());
+                if (item.getProduct() != null) {
+                    closeReportDTO.setProductId(item.getProduct().getId());
+                    closeReportDTO.setProductName(item.getProduct().getName());
+                    closeReportDTO.setCommision(item.getProduct().getCommission());
+                    closeReportDTO.setConcept(closeReportDTO.getProductName());
+                }
+                if (item.getService() != null) {
+                    closeReportDTO.setServiceId(item.getService().getId());
+                    closeReportDTO.setServiceName(item.getService().getName());
+                    closeReportDTO.setCommision(item.getService().getCommission());
+                    closeReportDTO.setConcept(closeReportDTO.getServiceName());
+                }
+                closeReportDTO.setQuantity(item.getQuantity());
+                closeReportDTO.setPrice(item.getPrice());
+                closeReportDTO.setTotal(item.getPrice().multiply(new BigDecimal(item.getQuantity())));
+                totalResume = totalResume.add(closeReportDTO.getTotal());
+                closeReportDTO.setCommisionTotal(closeReportDTO.getTotal()
+                        .multiply(new BigDecimal(closeReportDTO.getCommision())
+                                .divide(new BigDecimal(100), 2, BigDecimal.ROUND_UP)));
+                commissionResume = commissionResume.add(closeReportDTO.getCommisionTotal());
+                if (item.getTransaction().getClient() != null) {
+                    closeReportDTO.setClientId(item.getTransaction().getClient().getId());
+                    closeReportDTO.setClientName(item.getTransaction().getClient().getName());
+                }
+                if (item.getEmployee() != null) {
+                    closeReportDTO.setEmployeeId(item.getEmployee().getId());
+                    closeReportDTO.setEmployeeName(item.getEmployee().getName());
+                }
+                if (item.getTransaction().getSubsidiary() != null) {
+                    closeReportDTO.setSubsidiaryId(item.getTransaction().getSubsidiary().getId());
+                    closeReportDTO.setSubsidiaryName(item.getTransaction().getSubsidiary().getName());
+                }
+
+                closeReportDTOS.add(closeReportDTO);
+            }
         }
 
-        return salesReportDTOS;
+        CloseReportResumeDTO closeReportResumeDTO = new CloseReportResumeDTO();
+        closeReportResumeDTO.setCommission(commissionResume);
+        closeReportResumeDTO.setTotal(totalResume);
+        closeReportResumeDTO.setItems(closeReportDTOS);
+
+        return closeReportResumeDTO;
     }
 
     public List<SalesReportDTO> dayReport(){
