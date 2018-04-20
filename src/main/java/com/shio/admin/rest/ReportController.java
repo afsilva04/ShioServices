@@ -35,6 +35,6 @@ public class ReportController {
     public CloseReportResumeDTO closeReport() { return reportService.closeReport(); }
 
     @GetMapping("/day")
-    public List<SalesReportDTO> dayReport() { return reportService.dayReport(); }
+    public DayReportResumeDTO dayReport() { return reportService.dayReport(); }
 
 }
