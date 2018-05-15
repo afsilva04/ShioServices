@@ -13,8 +13,12 @@ public class EmployeeService {
 
     private EmployeeRepository employeeRepository;
 
-    public List<Employee> getAll(){
-        return employeeRepository.findAll();
+    public List<Employee> getAll(Long subsidiary){
+        if(subsidiary == 0) {
+            return employeeRepository.findAll();
+        } else {
+            return employeeRepository.findAllBySubsidiaryId(subsidiary);
+        }
     }
 
     public Employee getSingle(Long id){

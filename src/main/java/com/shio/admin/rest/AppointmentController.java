@@ -4,10 +4,12 @@ import com.shio.admin.DTO.AppointmentCreateDTO;
 import com.shio.admin.DTO.AppointmentViewDTO;
 import com.shio.admin.domain.Appointment;
 import com.shio.admin.domain.Transaction;
+import com.shio.admin.security.SecurityUtils;
 import com.shio.admin.service.AppointmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -17,10 +19,11 @@ import java.util.List;
 public class AppointmentController {
 
     private AppointmentService appointmentService;
+    private HttpServletRequest httpServletRequest;
 
     @GetMapping
     public List<AppointmentViewDTO> getAll(){
-        return appointmentService.getAll();
+        return appointmentService.getAll(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
     }
 
     /*@GetMapping("/search/{date}")

@@ -29,10 +29,16 @@ public class AppointmentService {
     private AppointmentItemRepository appointmentItemRepository;
     private TransactionItemService transactionItemService;
 
-    public List<AppointmentViewDTO> getAll(){
-        return appointmentRepository.findAll().stream()
-                .map(a -> appointmentMapper.EntityToViewDTO(a))
-                .collect(Collectors.toList());
+    public List<AppointmentViewDTO> getAll(Long subsidiary){
+        if (subsidiary ==0) {
+            return appointmentRepository.findAll().stream()
+                    .map(a -> appointmentMapper.EntityToViewDTO(a))
+                    .collect(Collectors.toList());
+        } else {
+            return appointmentRepository.findAllBySubsidiaryId(subsidiary).stream()
+                    .map(a -> appointmentMapper.EntityToViewDTO(a))
+                    .collect(Collectors.toList());
+        }
     }
 
     /*public List<Appointment> getAllByDate(String date){

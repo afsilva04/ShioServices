@@ -17,11 +17,18 @@ public class EntryService {
     private EntryRepository entryRepository;
     private EntryMapper entryMapper;
 
-    public List<EntryDTO> getAll(){
-        return entryRepository.findAll()
-                .stream()
-                .map(e -> entryMapper.toDTO(e))
-                .collect(Collectors.toList());
+    public List<EntryDTO> getAll(Long subsidiary){
+        if (subsidiary == 0) {
+            return entryRepository.findAll()
+                    .stream()
+                    .map(e -> entryMapper.toDTO(e))
+                    .collect(Collectors.toList());
+        } else {
+            return entryRepository.findAllBySubsidiaryId(subsidiary)
+                    .stream()
+                    .map(e -> entryMapper.toDTO(e))
+                    .collect(Collectors.toList());
+        }
     }
 
     public EntryDTO getSingle(Long id){

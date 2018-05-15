@@ -25,11 +25,18 @@ public class TransactionService {
     private TransactionItemRepository transactionItemRepository;
     private TransactionItemMapper transactionItemMapper;
 
-    public List<TransactionDTO> getAll(){
-        return transactionRepository.findAll()
-                .stream()
-                .map(t -> transactionMapper.toDTO(t))
-                .collect(Collectors.toList());
+    public List<TransactionDTO> getAll(Long subsidiary){
+        if (subsidiary == 0) {
+            return transactionRepository.findAll()
+                    .stream()
+                    .map(t -> transactionMapper.toDTO(t))
+                    .collect(Collectors.toList());
+        } else {
+            return transactionRepository.findAllBySubsidiaryId(subsidiary)
+                    .stream()
+                    .map(t -> transactionMapper.toDTO(t))
+                    .collect(Collectors.toList());
+        }
     }
 
     public TransactionDTO getSingle(Long id){

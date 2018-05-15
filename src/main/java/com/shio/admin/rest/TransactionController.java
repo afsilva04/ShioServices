@@ -2,10 +2,12 @@ package com.shio.admin.rest;
 
 import com.shio.admin.DTO.TransactionDTO;
 import com.shio.admin.domain.Transaction;
+import com.shio.admin.security.SecurityUtils;
 import com.shio.admin.service.TransactionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -15,10 +17,11 @@ import java.util.List;
 public class TransactionController {
 
     private TransactionService transactionService;
+    private HttpServletRequest httpServletRequest;
 
     @GetMapping
     public List<TransactionDTO> getAll(){
-        return transactionService.getAll();
+        return transactionService.getAll(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
     }
 
     @GetMapping("/{id}")

@@ -17,7 +17,6 @@ public class ClientController {
     private final ClientRepository clientRepository;
     private final ClientService clientService;
 
-
     @GetMapping
     public List<ClientDTO> getAll(){
         return clientService.getAll();

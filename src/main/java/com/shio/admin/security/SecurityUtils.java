@@ -1,8 +1,8 @@
 package com.shio.admin.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 public class SecurityUtils {
@@ -22,6 +22,16 @@ public class SecurityUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
+    }
+
+    public static Long getSubsidiaryFromToken(HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("Authorization");
+        String tokenClean = token.split(" ")[1];
+        String[] split_string = tokenClean.split("\\.");
+
+        Jwt<Header,Claims> parsedToken = Jwts.parser().parse(split_string[0] + "." + split_string[1] + ".");
+        Long sub = new Long(parsedToken.getBody().get("subsidiary").toString());
+        return sub;
     }
 
 }

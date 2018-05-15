@@ -28,9 +28,11 @@ public class ReportService {
     private TransactionItemRepository transactionItemRepository;
     private AppointmentItemRepository appointmentItemRepository;
 
-    public List<SalesReportDTO> salesReport(){
+    public List<SalesReportDTO> salesReport(Long subsidiary){
 
         List<TransactionItem> transactionItems = transactionItemRepository.findAll();
+        List<Long> transaction = transactionItemRepository.queryAllBySubsidiaryId(subsidiary); //Borrar
+
         List<SalesReportDTO> salesReportDTOS = new ArrayList<>();
 
         for (TransactionItem item : transactionItems) {

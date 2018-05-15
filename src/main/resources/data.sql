@@ -40,6 +40,9 @@ VALUES ('6', 'Girasol', 'olivares@shio.com', '3322244', '3187766655', 'loc', 'co
 INSERT INTO employee (name, email, phone, position, active, subsidiary_id)
 VALUES ('Wisi', 'wisi@dabalash.org', '123123123', 'Administrador', '1', '1');
 
+INSERT INTO employee (name, email, phone, position, active, subsidiary_id)
+VALUES ('Empleado 2', 'empleado@dabalash.org', '123123444', 'Administrador', '1', '2');
+
 --CLIENT
 INSERT INTO client (name, email, phone, mobile, birthdate, country_id, state_id, city_id, location, colony,
 address, zip, rfc, subsidiary_id, active)
@@ -49,7 +52,7 @@ VALUES ('Juan Camilo', 'jcamilo@gmail.com', '3335500', '3013336655', '1987-07-04
 INSERT INTO client (name, email, phone, mobile, birthdate, country_id, state_id, city_id, location, colony,
 address, zip, rfc, subsidiary_id, active)
 VALUES ('Andres Felipe', 'andres@gmail.com', '2224400', '3184094630', '1987-05-17', '1', '1', '2', '2', '1',
-'3311 Water AV', '123987', 'SBI130426ID8', '3', '1');
+'3311 Water AV', '123987', 'SBI130426ID8', '2', '1');
 
 --PRODUCT
 INSERT INTO product (name, description, codbar, commission, active, price, key, unit)
@@ -61,18 +64,24 @@ VALUES ('Corte Mujer', '', '123123', '15', '1', '500', '20', '53131638', 'XUN');
 
 --APPOINTMENT
 INSERT INTO appointment (date, note, rescheduled, client_id, subsidiary_id)
-VALUES ('2018-03-03', 'Notas', 'true', '1', '2');
+VALUES ('2018-03-03', 'Notas', 'true', '1', '1');
+
+INSERT INTO appointment (date, note, rescheduled, client_id, subsidiary_id)
+VALUES ('2018-03-10', 'Notas', 'false', '2', '2');
 
 --APPOINTMENT ITEM
 INSERT INTO appointment_item (time, started, status, service_id, employee_id, appointment_id)
 VALUES ('2018-03-03 10:15:00', '2018-04-08 23:35:00', 'Iniciada', '1', '1', '1');
+
+INSERT INTO appointment_item (time, started, status, service_id, employee_id, appointment_id)
+VALUES ('2018-03-03 11:10:00', '2018-04-08 23:30:00', 'Iniciada', '1    ', '2', '2');
 
 --TRANSACTION
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
 VALUES ('2018-03-03', '123123', '', 'false', 'true', '1', '1', '1');
 
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
-VALUES ('2018-03-08', '', '', 'false', 'false', '1', '1', '1');
+VALUES ('2018-03-08', '', '', 'false', 'false', '1', '1', '2');
 
 INSERT INTO transaction (date, invoice, invoicepdf, canceled, processed, reason, client_id, subsidiary_id)
 VALUES ('2018-03-12', '', '', 'false', 'false', '2', '2', '3');
@@ -102,9 +111,15 @@ VALUES ('5', '1', '2');
 INSERT INTO entry (date, confirmed, subsidiary_id)
 VALUES ('2018-03-10', '0', '1');
 
+INSERT INTO entry (date, confirmed, subsidiary_id)
+VALUES ('2018-04-12', '0', '2');
+
 --ENTRY ITEM
 INSERT INTO entryitem (quantity, product_id, entry_id)
 VALUES ('3', '1', '1');
+
+INSERT INTO entryitem (quantity, product_id, entry_id)
+VALUES ('6', '1', '2');
 
 --COUPON
 INSERT INTO coupon (code, quantity, available, transactionorigin, transactionused, product_id, service_id, client_id)
