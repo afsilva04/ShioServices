@@ -13,6 +13,6 @@ public interface TransactionItemRepository extends JpaRepository<TransactionItem
     List<TransactionItem> findAllByAnticipatedTrueAndCouponNotNullAndDateusedIsNull();
     List<TransactionItem> findAllByAnticipatedTrue();
 
-    @Query(value = "SELECT t.id FROM TransactionItem i INNER JOIN transaction t ON i.transaction_id = t.id WHERE t.subsidiary_id = 1 OR 1 = 1", nativeQuery = true)
-    List<Long> queryAllBySubsidiaryId(Long subsidiaryId);
+    @Query(value = "SELECT i.* FROM TransactionItem i INNER JOIN transaction t ON i.transaction_id = t.id WHERE t.subsidiary_id = :subsidiaryId", nativeQuery = true)
+    List<TransactionItem> queryAllBySubsidiaryId(Long subsidiaryId);
 }

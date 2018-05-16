@@ -2,10 +2,12 @@ package com.shio.admin.rest;
 
 import com.shio.admin.DTO.InventoryDTO;
 import com.shio.admin.domain.Inventory;
+import com.shio.admin.security.SecurityUtils;
 import com.shio.admin.service.InventoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -15,6 +17,7 @@ import java.util.List;
 public class InventoryController {
 
     private InventoryService inventoryService;
+    private HttpServletRequest httpServletRequest;
 
     @GetMapping("/{id}")
     public InventoryDTO getSingle(@PathVariable("id") Long id){
@@ -23,7 +26,7 @@ public class InventoryController {
 
     @GetMapping
     public List<InventoryDTO> getAll(){
-        return inventoryService.getAll();
+        return inventoryService.getAll(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
     }
 
     @GetMapping("/subsidiary/{id}")

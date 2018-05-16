@@ -16,6 +16,7 @@ public class SalesReportDTO {
     private String productName;
     private Long serviceId;
     private String serviceName;
+    private String concept;
     private int quantity;
     private BigDecimal price;
     private BigDecimal total;

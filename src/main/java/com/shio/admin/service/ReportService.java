@@ -30,8 +30,12 @@ public class ReportService {
 
     public List<SalesReportDTO> salesReport(Long subsidiary){
 
-        List<TransactionItem> transactionItems = transactionItemRepository.findAll();
-        List<Long> transaction = transactionItemRepository.queryAllBySubsidiaryId(subsidiary); //Borrar
+        List<TransactionItem> transactionItems;
+        if(subsidiary == 0) {
+            transactionItems = transactionItemRepository.findAll();
+        } else {
+            transactionItems = transactionItemRepository.queryAllBySubsidiaryId(subsidiary);
+        }
 
         List<SalesReportDTO> salesReportDTOS = new ArrayList<>();
 
@@ -45,11 +49,13 @@ public class ReportService {
                     salesReportDTO.setProductId(item.getProduct().getId());
                     salesReportDTO.setProductName(item.getProduct().getName());
                     salesReportDTO.setCommision(item.getProduct().getCommission());
+                    salesReportDTO.setConcept(salesReportDTO.getProductName());
                 }
                 if (item.getService() != null) {
                     salesReportDTO.setServiceId(item.getService().getId());
                     salesReportDTO.setServiceName(item.getService().getName());
                     salesReportDTO.setCommision(item.getService().getCommission());
+                    salesReportDTO.setConcept(salesReportDTO.getServiceName());
                 }
                 salesReportDTO.setQuantity(item.getQuantity());
                 salesReportDTO.setPrice(item.getPrice());
@@ -74,9 +80,15 @@ public class ReportService {
         return salesReportDTOS;
     }
 
-    public CloseReportResumeDTO closeReport(){
+    public CloseReportResumeDTO closeReport(Long subsidiary){
 
-        List<TransactionItem> transactionItems = transactionItemRepository.findAll();
+        List<TransactionItem> transactionItems;
+        if(subsidiary == 0) {
+            transactionItems = transactionItemRepository.findAll();
+        } else {
+            transactionItems = transactionItemRepository.queryAllBySubsidiaryId(subsidiary);
+        }
+
         List<CloseReportDTO> closeReportDTOS = new ArrayList<>();
 
         BigDecimal commissionResume  = new BigDecimal(0);
@@ -133,11 +145,21 @@ public class ReportService {
         return closeReportResumeDTO;
     }
 
-    public DayReportResumeDTO dayReport(){
+    public DayReportResumeDTO dayReport(Long subsidiary){
 
-        List<Appointment> appointments = appointmentRepository.findAll();
-        List<Transaction> transactions = transactionRepository.findAll();
-        List<TransactionItem> transactionItems = transactionItemRepository.findAll();
+        List<Appointment> appointments;
+        List<Transaction> transactions;
+        List<TransactionItem> transactionItems;
+        if(subsidiary == 0) {
+            appointments = appointmentRepository.findAll();
+            transactions = transactionRepository.findAll();
+            transactionItems = transactionItemRepository.findAll();
+        } else {
+            appointments = appointmentRepository.findAllBySubsidiaryId(subsidiary);
+            transactions = transactionRepository.findAllBySubsidiaryId(subsidiary);
+            transactionItems = transactionItemRepository.queryAllBySubsidiaryId(subsidiary);
+        }
+
         List<DayReportDTO> dayReportDTOS = new ArrayList<>();
 
         int customersServed = 0;
@@ -201,7 +223,9 @@ public class ReportService {
 
             dayReportDTOS.add(dayReportDTO);
 
-            avgTicket = salesTotal.divide(new BigDecimal(tickets).setScale(0,BigDecimal.ROUND_UP));
+            if (tickets != 0) {
+                avgTicket = salesTotal.divide(new BigDecimal(tickets).setScale(0, BigDecimal.ROUND_UP));
+            }
         }
 
         DayReportResumeDTO dayReportResumeDTO = new DayReportResumeDTO();
@@ -215,8 +239,14 @@ public class ReportService {
         return dayReportResumeDTO;
     }
 
-    public List<AppointmentsReportDTO> appointmentsReport(){
-        List<AppointmentItem> appointmentItems = appointmentItemRepository.findAll();
+    public List<AppointmentsReportDTO> appointmentsReport(Long subsidiary){
+        List<AppointmentItem> appointmentItems;
+        if(subsidiary == 0) {
+            appointmentItems = appointmentItemRepository.findAll();
+        } else {
+            appointmentItems = appointmentItemRepository.queryAllBySubsidiaryId(subsidiary);
+        }
+
         List<AppointmentsReportDTO> appointmentsReportDTOS = new ArrayList<AppointmentsReportDTO>();
 
         for (AppointmentItem item: appointmentItems) {
@@ -237,8 +267,15 @@ public class ReportService {
         return appointmentsReportDTOS;
     }
 
-    public List<AppointmentsInProgressReportDTO> appointmentsInProgressReport(){
-        List<AppointmentItem> appointmentItems = appointmentItemRepository.findAll();
+    public List<AppointmentsInProgressReportDTO> appointmentsInProgressReport(Long subsidiary){
+
+        List<AppointmentItem> appointmentItems;
+        if(subsidiary == 0) {
+            appointmentItems = appointmentItemRepository.findAll();
+        } else {
+            appointmentItems = appointmentItemRepository.queryAllBySubsidiaryId(subsidiary);
+        }
+
         List<AppointmentsInProgressReportDTO> appointmentsInProgressReportDTOS =
                 new ArrayList<AppointmentsInProgressReportDTO>();
 

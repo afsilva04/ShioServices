@@ -21,11 +21,18 @@ public class InventoryService {
     private EntryRepository entryRepository;
     private EntryItemRepository entryItemRepository;
 
-    public List<InventoryDTO> getAll(){
-        return inventoryRepository.findAll()
-                .stream()
-                .map(i -> inventoryMapper.toDTO(i))
-                .collect(Collectors.toList());
+    public List<InventoryDTO> getAll(Long subsidiary){
+        if (subsidiary == 0) {
+            return inventoryRepository.findAll()
+                    .stream()
+                    .map(i -> inventoryMapper.toDTO(i))
+                    .collect(Collectors.toList());
+        } else {
+            return inventoryRepository.findAllBySubsidiaryId(subsidiary)
+                    .stream()
+                    .map(i -> inventoryMapper.toDTO(i))
+                    .collect(Collectors.toList());
+        }
     }
 
     public InventoryDTO getSingle(Long id){

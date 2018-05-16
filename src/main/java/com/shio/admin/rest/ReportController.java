@@ -41,17 +41,23 @@ public class ReportController {
     }
 
     @GetMapping("/appointments")
-    public List<AppointmentsReportDTO> appointmentReport() { return reportService.appointmentsReport(); }
+    public List<AppointmentsReportDTO> appointmentReport() {
+        return reportService.appointmentsReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
+    }
 
     @GetMapping("/appointments-in-progress")
     public List<AppointmentsInProgressReportDTO> appointmentsInProgress() {
-        return reportService.appointmentsInProgressReport();
+        return reportService.appointmentsInProgressReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
     }
 
     @GetMapping("/close")
-    public CloseReportResumeDTO closeReport() { return reportService.closeReport(); }
+    public CloseReportResumeDTO closeReport() {
+        return reportService.closeReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
+    }
 
     @GetMapping("/day")
-    public DayReportResumeDTO dayReport() { return reportService.dayReport(); }
+    public DayReportResumeDTO dayReport() {
+        return reportService.dayReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
+    }
 
 }

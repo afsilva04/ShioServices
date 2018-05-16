@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "Appointment_Item")
+@Table(name = "Appointmentitem")
 @Data
 public class AppointmentItem {
 
