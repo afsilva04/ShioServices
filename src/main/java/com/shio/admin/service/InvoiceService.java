@@ -121,22 +121,26 @@ public class InvoiceService {
 
         CfdiRequest cfdiRequest = new CfdiRequest();
         //cfdiRequest.setSerie("F");
+        cfdiRequest.setSerie("B");
         //cfdiRequest.setFolio(24200);
+        cfdiRequest.setFolio(1);
         cfdiRequest.setFecha("AUTO");
         cfdiRequest.setFormaPago(invoiceData.getPaymentMethod());
         //cfdiRequest.setCondicionesDePago("CONDICIONES");
         cfdiRequest.setSubTotal(invoiceDTO.getSubtotal().toString());
         //cfdiRequest.setDescuento(null);
         cfdiRequest.setMoneda("MXN");
-        //cfdiRequest.setTipoCambio(1);
+        cfdiRequest.setTipoCambio(1);
         cfdiRequest.setTotal(invoiceDTO.getTotal().toString());
         cfdiRequest.setTipoDeComprobante("I");
+
         cfdiRequest.setMetodoPago("PUE");
         cfdiRequest.setLugarExpedicion("67150"); //Cambiar por codigo postal de la sucursal
         cfdiRequest.setLeyendaFolio("FACTURA"); //Opcional
 
         Emisor emisor = new Emisor();
-        emisor.setRegimenFiscal("612"); //Cambiar al de Shio 601
+        emisor.setRegimenFiscal("601"); //Cambiar al de Shio 601
+//        emisor.setRegimenFiscal("612"); //Cambiar al de Shio 601
         cfdiRequest.setEmisor(emisor);
 
         Receptor receptor = new Receptor();
@@ -157,7 +161,7 @@ public class InvoiceService {
         cfdiRequest.setReceptor(receptor);
 
         BigDecimal itemTotal;
-        BigDecimal tax = new BigDecimal(0.16).setScale(2, BigDecimal.ROUND_HALF_DOWN);
+        BigDecimal tax = new BigDecimal(0.16).setScale(2, BigDecimal.ROUND_HALF_EVEN);
         ArrayList<Concepto> conceptos = new ArrayList<>();
         for (TransactionItemDTO item: invoiceDTO.getTransactionItems()){
             itemTotal = BigDecimal.ZERO;
@@ -173,10 +177,10 @@ public class InvoiceService {
             else
                 concepto.setDescripcion(item.getServiceName());
             concepto.setValorUnitario(item.getPrice()
-                    .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_HALF_DOWN)
+                    .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_UP)
                     .toString());
             itemTotal = item.getPrice().multiply(new BigDecimal(item.getQuantity()))
-                .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_HALF_DOWN);
+                .divide(new BigDecimal(1.16), 2, BigDecimal.ROUND_UP);
             concepto.setImporte(itemTotal.toString());
 
             ImpuestoConcepto impuestoConcepto = new ImpuestoConcepto();

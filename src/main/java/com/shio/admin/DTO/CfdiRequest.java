@@ -21,7 +21,7 @@ public class CfdiRequest {
     private String SubTotal;
     private String Descuento;
     private String Moneda;
-    //private int TipoCambio;
+    private int TipoCambio;
     private String Total;
     private String TipoDeComprobante;
     private String MetodoPago;
