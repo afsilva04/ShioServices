@@ -31,11 +31,13 @@ public class CouponMapper {
         if(coupon.getProduct() != null) {
             couponDTO.setProductId(coupon.getProduct().getId());
             couponDTO.setProductName(coupon.getProduct().getName());
+            couponDTO.setConcept(coupon.getProduct().getName());
         }
 
         if(coupon.getService() != null) {
             couponDTO.setServiceId(coupon.getService().getId());
             couponDTO.setServiceName(coupon.getService().getName());
+            couponDTO.setConcept(coupon.getService().getName());
         }
 
         if(coupon.getClient() != null) {

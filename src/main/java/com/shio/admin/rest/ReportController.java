@@ -9,10 +9,7 @@ import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,6 +36,11 @@ public class ReportController {
 
         return reportService.salesReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest));
     }
+
+//    @GetMapping("/search")
+//    public List<SalesReportDTO> getAll(@RequestParam(value = "search_txt", required = false) String searchTxt) {
+//        return reportService.salesReport(SecurityUtils.getSubsidiaryFromToken(httpServletRequest) ,searchTxt);
+//    }
 
     @GetMapping("/appointments")
     public List<AppointmentsReportDTO> appointmentReport() {

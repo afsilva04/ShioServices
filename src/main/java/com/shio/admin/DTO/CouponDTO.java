@@ -22,6 +22,7 @@ public class CouponDTO {
     private String productName;
     private Long serviceId;
     private String serviceName;
+    private String concept;
     private Long clientId;
     private String clientName;
 
